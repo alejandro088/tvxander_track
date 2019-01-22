@@ -16,4 +16,6 @@ Route::get('/search/{query}', 'SearchController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/profile', 'UserController@index')->name('user.profile');
+Route::get('/settings', 'UserController@settings')->name('user.settings');
+Route::post('/settings', 'UserController@settingsStore')->name('settings.store');
