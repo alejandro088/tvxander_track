@@ -82,7 +82,7 @@
             <div class="content">
                 <ul>
                     @foreach ($movies as $movie)
-                        <li>{{$movie->getOriginalTitle()}}</li>    
+                        <li>{{$movie->getName()}}</li>    
                     @endforeach
                 </ul>
             </div>

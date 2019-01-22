@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'MovieController@index');
+Route::get('/search/{query}', 'SearchController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
