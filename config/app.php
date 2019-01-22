@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Tmdb\Laravel\TmdbServiceProvider::class,
+        App\Providers\TmdbServiceProvider::class,
 
     ],
 
