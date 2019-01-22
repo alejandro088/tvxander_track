@@ -20,7 +20,6 @@ class SearchController extends Controller
         // returns information of a movie
 
         $searchQuery = new TvSearchQuery();
-        $searchQuery->language('ES');
         $searchQuery->searchType();
 
         $movies = $this->results->searchTv($query, $searchQuery);
