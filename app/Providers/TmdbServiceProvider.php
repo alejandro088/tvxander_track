@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Tmdb\HttpClient\Plugin\LanguageFilterPlugin;
+use Tmdb\HttpClient\Plugin\AdultFilterPlugin;
 
 class TmdbServiceProvider extends ServiceProvider {
 
@@ -14,9 +15,14 @@ class TmdbServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
-        $plugin = new LanguageFilterPlugin('nl');
+        $plugin = new LanguageFilterPlugin('es');
         $client = $this->app->make('Tmdb\Client');
         $client->getHttpClient()->addSubscriber($plugin);
+
+        $plugin = new AdultFilterPlugin(true);
+        $client = $this->app->make('Tmdb\Client');
+        $client->getHttpClient()->addSubscriber($plugin);
+
     }
 
     /**
