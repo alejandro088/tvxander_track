@@ -24,7 +24,7 @@ class SearchController extends Controller
         $searchQuery->searchType();
 
         $movies = $this->results->searchTv($query, $searchQuery);
-        return view('search', compact('movies'));
+        return view('search', compact('movies', 'query'));
     }
 
 }
