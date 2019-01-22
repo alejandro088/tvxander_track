@@ -16,7 +16,7 @@ class UpdateEpisodesTable extends Migration
         Schema::table('episodes', function (Blueprint $table) {
             $table->boolean('watched');
             $table->boolean('archived');
-        }
+        });
     }
 
     /**
@@ -26,6 +26,7 @@ class UpdateEpisodesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropColumn('watched');
+        Schema::dropColumn('archived');
     }
 }

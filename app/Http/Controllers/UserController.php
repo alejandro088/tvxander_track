@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $shows = Auth::user()->TvShows;
@@ -22,8 +33,25 @@ class UserController extends Controller
         return view('settings', compact('settings'));
     }
 
-    public function settingsStore()
+    public function settingsStore(Request $request)
     {
-        
+        Setting::setLanguage($request->input('language'));
+        Setting::setFilterAdult($request->input('adult'));
+
+        return redirect()->back();
+    }
+
+    public function myshows()
+    {
+        $shows = Auth::user()->TvShows;
+
+        return view('myshows', compact('shows'));
+    }
+
+    public function unwatched()
+    {
+        $shows = Auth::user()->TvShows;
+
+        return view('unwatched', compact('shows'));
     }
 }

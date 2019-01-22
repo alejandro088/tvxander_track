@@ -3,26 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Tmdb\Repository\MovieRepository;
+use Tmdb\Repository\TvRepository;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private $movies;
+
+    private $shows;
+
+    function __construct(MovieRepository $movies, TvRepository $shows)
     {
-        $this->middleware('auth');
+        $this->movies = $movies;
+
+        $this->shows = $shows;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    function index()
     {
-        return view('home');
+        // returns information of a movie
+        $movies = $this->movies->getPopular(); 
+        $shows = $this->shows->getPopular();
+
+        return view('welcome', compact('movies', 'shows'));
     }
 }
