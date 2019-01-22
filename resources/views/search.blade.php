@@ -2,7 +2,7 @@
 
 @extends('layouts.app')
 
-@section('title', "Result of $query")
+@section('title', " | Result of $query")
 
 @section('content')
 <div class="container">
@@ -22,7 +22,7 @@
                         
                             @foreach ($movies as $movie)
                                 
-                                {!! $image->getHtml($movie->getPosterImage(), 'w154', 260, 420) !!}    
+                                {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200) !!}    
                             @endforeach
                         
                     </div>

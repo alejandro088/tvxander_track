@@ -9,53 +9,61 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <span data-feather="file"></span>
+                <span data-feather="calendar"></span>
                 Calendar
               </a>
             </li>
+            @auth
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="star"></span>
+                  My Shows
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="eye"></span>
+                  Unwatched
+                </a>
+              </li>
+            @endauth
+            
+
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="shopping-cart"></span>
-                My Shows
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users"></span>
-                Unwatched
-              </a>
+                    <a class="nav-link" href="#">
+                      <span data-feather="eye"></span>
+                      Browse
+                    </a>
             </li>
             
           </ul>
   
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Social Links</span>
-            <a class="d-flex align-items-center text-muted" href="#">
-              <span data-feather="plus-circle"></span>
-            </a>
+            
           </h6>
           <ul class="nav flex-column mb-2">
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
+                <span data-feather="facebook"></span>
                 Facebook
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
+                <span data-feather="twitter"></span>
                 Twitter
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
+                <span data-feather="github"></span>
                 GitHub
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">
-                <span data-feather="file-text"></span>
+                <i class="fab fa-discord"></i>
                 Discord
               </a>
             </li>
