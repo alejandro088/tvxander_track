@@ -21,7 +21,7 @@ class CreateEpisodesTable extends Migration
             $table->integer('episode_number');
             $table->json('guest_stars');
             $table->string('name');
-            $table->string('overview');
+            $table->text('overview');
             $table->integer('season_number');
             $table->string('still_path');
             $table->string('vote_average_tmdb');

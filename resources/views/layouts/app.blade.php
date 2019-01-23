@@ -33,6 +33,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
+    @yield('css')
 </head>
 <body>
     <div id="app">
@@ -40,12 +42,13 @@
             <nav class="navbar navbar-expand-md fixed-top bg-dark flex-md-nowrap p-0 shadow">
                 <div class="container">   
                 <a class="navbar-brand px-3 mr-0" href="{{ url('/') }}">
-                    <img src="favicon-32x32.png" />  
+                    <img src="/favicon-32x32.png" />  
                     <span>{{ config('app.name', 'Laravel') }}</span>
                 </a>
                 
-                    <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
-                    
+                <form action="{{route('search')}}" method="GET" id="myForm" style="width: 100%;">
+                    <input class="form-control form-control-dark" type="text" id="search" name="q" placeholder="Search" aria-label="Search">
+                </form>
                     
                     <ul class="navbar-nav px-3 ml-auto">
                       @include('partials.nav-buttons')
@@ -76,5 +79,16 @@
 <!-- Scripts -->
 <script src="https://unpkg.com/feather-icons"></script>
 <script src="{{ asset('js/dashboard.js') }}" defer></script>
+
+<script>
+    $('#search').keypress(function(e) {
+    var keycode = (e.keyCode ? e.keyCode : e.which);
+    if (keycode == '13') {
+        document.getElementById("myForm").submit();
+        return false;
+    }
+});
+</script>
+@yield('js')
 </body>
 </html>

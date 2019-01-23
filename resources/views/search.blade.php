@@ -5,7 +5,7 @@
 @section('title', " | Result of $query")
 
 @section('content')
-<div class="container">
+<div class="container mt-3">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -20,10 +20,11 @@
 
                     <div class="content">
                         
-                            @foreach ($movies as $movie)
-                                
-                                {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200) !!}    
-                            @endforeach
+                        @foreach ($movies as $movie)
+                            <a href="{{route('tv.show',$movie->getId())}}">
+                                {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200) !!}
+                            </a>    
+                        @endforeach
                         
                     </div>
                 </div>

@@ -21,7 +21,7 @@ class CreateTvShowsTable extends Migration
             $table->json('genres');
             $table->string('poster_path');
             $table->string('name');
-            $table->string('overview');
+            $table->text('overview');
             $table->date('first_air_date');
             $table->string('homepage');
             $table->boolean('in_production');

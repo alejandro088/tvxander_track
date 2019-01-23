@@ -15,9 +15,11 @@ class SearchController extends Controller
         $this->results = $results;
     }
 
-    function index($query)
+    function index(Request $request)
     {
         // returns information of a movie
+
+        $query = $request->input('q');
 
         $searchQuery = new TvSearchQuery();
         $searchQuery->searchType();
