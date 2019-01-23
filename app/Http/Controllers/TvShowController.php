@@ -46,8 +46,41 @@ class TvShowController extends Controller
         $tvshow->production_companies = $show['production_companies'];
         $tvshow->networks = $show['networks'];
         $tvshow->status = $show['status'];
+        $tvshow->archived = false;
         $tvshow->save();
 
         return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        try {
+            $show = TvShow::where('show', $id)->where('user_id', auth()->user()->id);
+            
+            $show->delete();
+            
+        } catch (\Throwable $th) {
+            
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+
+        return redirect()->back();        
+    }
+
+    public function archive($id)
+    {
+        try {
+            
+            $show = TvShow::where('id', $id)->where('user_id', auth()->user()->id)->first();
+            
+            $show->archived = true;
+            $show->save();
+            
+        } catch (\Throwable $th) {
+            dd($th);
+            return redirect()->back()->withErrors($th->getMessage());
+        }
+
+        return redirect()->back();        
     }
 }

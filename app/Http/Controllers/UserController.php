@@ -45,13 +45,18 @@ class UserController extends Controller
     {
         $shows = Auth::user()->TvShows;
         
-        $currentShows = $shows->where('archived', false);
-
-        $endedShows = $shows->where('status', 'ended');
+        $currentShows = $shows->where('archived', false)->where('status', 'Returning Series');
 
         $archivedShows = $shows->where('archived', true);
+        
+        $endedShows = $shows->where('status', 'Ended');
 
-        return view('myshows', compact('currentShows', 'endedShows', 'archivedShows'));
+        $canceledShows = $shows->where('status', 'Canceled');
+
+        
+        
+
+        return view('myshows', compact('currentShows', 'endedShows', 'archivedShows', 'canceledShows'));
     }
 
     public function unwatched()

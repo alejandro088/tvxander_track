@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\TvShow');
     }
+
+    public function hasShow($id)
+    {
+        return $this->TvShows->where('show', $id)->first();
+    }
 }

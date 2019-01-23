@@ -9,15 +9,15 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     @forelse ($shows as $show)
-                        {{$show}}
+                    {{$show}}
                     @empty
-                        <span>En este momento no tienes Shows registrados</span>
+                    <span>En este momento no tienes Shows registrados</span>
                     @endforelse
                 </div>
             </div>

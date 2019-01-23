@@ -11,42 +11,42 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     <div class="content">
-                        
-                            @foreach ($movies as $movie)
-                                
-                                {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200) !!}    
-                            @endforeach
-                        
+
+                        @foreach ($movies as $movie)
+
+                        {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200) !!}
+                        @endforeach
+
                     </div>
                 </div>
             </div>
 
             <div class="card">
-                    <div class="card-header">Popular Shows</div>
-    
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-    
-                        <div class="content">
-                            
-                                @foreach ($shows as $show)
-                                    
-                                    {!! $image->getHtml($show->getPosterImage(), 'w154', null, 200) !!}    
-                                @endforeach
-                            
-                        </div>
+                <div class="card-header">Popular Shows</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+
+                    <div class="content">
+
+                        @foreach ($shows as $show)
+
+                        {!! $image->getHtml($show->getPosterImage(), 'w154', null, 200) !!}
+                        @endforeach
+
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

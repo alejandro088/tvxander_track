@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateEpisodesTable extends Migration
+class UpdateTvShowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class UpdateEpisodesTable extends Migration
      */
     public function up()
     {
-        Schema::table('episodes', function (Blueprint $table) {
-            $table->boolean('watched');
+        Schema::table('tv_shows', function (Blueprint $table) {
             $table->boolean('archived');
         });
     }
@@ -26,11 +25,10 @@ class UpdateEpisodesTable extends Migration
      */
     public function down()
     {
-        Schema::table('episodes', function($table)
+        Schema::table('tv_shows', function($table)
         {
             $table->dropColumn('archived');
-            $table->dropColumn('watched');
         });
-
+        
     }
 }
