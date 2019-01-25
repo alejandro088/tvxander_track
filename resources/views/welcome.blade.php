@@ -40,8 +40,9 @@
                     <div class="content">
 
                         @foreach ($shows as $show)
-
+                        <a href="{{route('tv.show',$show->getId())}}">
                         {!! $image->getHtml($show->getPosterImage(), 'w154', null, 200) !!}
+                        </a>
                         @endforeach
 
                     </div>

@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use Auth;
 use App\TvShow;
 use Illuminate\Http\Request;
+use Tmdb\Repository\TvRepository;
 
 class TvShowController extends Controller
 {
+    
+    private $shows;
+
+    function __construct(TvRepository $shows)
+    {
+        $this->shows = $shows;
+    }
+
     public function show($id)
     {
         $show = \Tmdb::getTvApi()->getTvshow($id);
@@ -82,5 +91,29 @@ class TvShowController extends Controller
         }
 
         return redirect()->back();        
+    }
+
+    public function list($id)
+    {
+        $show = \Tmdb::getTvApi()->getTvshow($id);
+        
+        $seasons = [];
+        for ($i=1; $i <= $show['number_of_seasons']; $i++) { 
+             $seasons[] = $this->episodesOfSeason($id, $i);
+        }
+
+        $tvShow = [ 
+            'show' => $show,
+            'seasons' => $seasons,
+        ];
+        return $tvShow;
+
+    }
+
+    public function episodesOfSeason($show, $season)
+    {
+        $tvShow = \Tmdb::getTvSeasonApi()->getSeason($show, $season);
+        return $tvShow;
+
     }
 }
