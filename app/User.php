@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->hasMany('App\TvShow');
     }
 
+    public function episodes()
+    {
+        return $this->hasMany('App\Episode');
+    }
+
     public function hasShow($id)
     {
         return $this->TvShows->where('show', $id)->first();
