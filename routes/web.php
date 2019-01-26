@@ -27,3 +27,9 @@ Route::post('/tv/{show}/archive', 'TvShowController@archive')->name('tv.archive'
 Route::delete('/tv/{show}/delete', 'TvShowController@delete')->name('tv.delete');
 Route::get('/shows/{id}', 'TvShowController@list')->name('tv.list');
 Route::get('/episodes/{show}/{season}', 'TvShowController@episodesOfSeason')->name('tv.season.episodes');
+Route::get('/update/{show}/', 'TvShowController@updateShow')->name('tv.update');
+
+Route::post('/episode/{episode}/watched', 'TvShowController@setWatched')->name('tv.episode.watched');
+Route::post('/season/{season}/watched', 'EpisodeTvController@setWatchedSeason')->name('tv.season.watched');
+
+Route::get('/season/{show}/{season}', 'EpisodeTvController@show')->name('season.show');
