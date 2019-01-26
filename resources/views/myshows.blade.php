@@ -110,7 +110,7 @@
 
 
                                 <td>
-                                    <form action="/tv/{{$show['id']}}/delete" method="post" class="d-inline">
+                                    <form action="/tv/{{$show->show}}/delete" method="post" class="d-inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
