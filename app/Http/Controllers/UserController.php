@@ -43,7 +43,7 @@ class UserController extends Controller
 
     public function myshows()
     {
-        $shows = Auth::user()->TvShows;
+        $shows = Auth::user()->TvShows()->with('episodes')->get();
         
         $currentShows = $shows->where('archived', false)->where('status', 'Returning Series');
 

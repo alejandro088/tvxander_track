@@ -29,11 +29,14 @@ class TvShowController extends Controller
         $tvshow->$field = $show[$field];
     }
 
-    public function store($id)
-    {
+    public function saveShow($id){
         $show = \Tmdb::getTvApi()->getTvshow($id);
         
-        $tvshow = new TvShow();
+        $tvshow = \App\TvShow::where('user_id', auth()->user()->id)->where('show', $id)->first();
+        
+        if(!$tvshow)
+            $tvshow = new TvShow();
+            
         $tvshow->show = $show['id'];
         $tvshow->user_id = Auth::user()->id;
         $tvshow->created_by = $show['created_by'];
@@ -57,6 +60,65 @@ class TvShowController extends Controller
         $tvshow->status = $show['status'];
         $tvshow->archived = false;
         $tvshow->save();
+    }
+
+    public function saveSeasons($id){
+        $show = \Tmdb::getTvApi()->getTvshow($id);
+        $seasons = $show['seasons'];
+
+        foreach ($seasons as $season) {
+            //dd($season);
+            $season['_id'] = $season['id'];
+            $season['tv_show_id'] = $id;
+            //dd($season['_id']);
+            $newseason = \App\Season::updateOrCreate(
+                ['user_id' => auth()->user()->id,
+                '_id' => $season['_id']],
+                $season);
+            //dd($newseason);
+            $this->saveEpisodes($id, $newseason);    
+        }
+        
+        
+    }
+
+    public function saveEpisodes($show, $newseason)
+    {
+        $season = \Tmdb::getTvSeasonApi()->getSeason($show, $newseason->season_number);
+
+        $episodes = $season['episodes'];
+
+        
+
+        foreach ($episodes as $episode) {
+            
+            $episode['_id'] = $episode['id'];
+            $episode['tv_show_id'] = $show;
+            //dd($newseason->id);
+            $episode['season_id'] = $newseason->id;
+            $episode['vote_average_tmdb'] = $episode['vote_average']; 
+            $episode['vote_count_tmdb'] = $episode['vote_count'];
+            $episode['crew'] = json_encode($episode['crew']); 
+            $episode['guest_stars'] = json_encode($episode['guest_stars']); 
+            //dd($season['_id']);
+
+            //$showid = TvShow::where('show', $show)->where('user_id', auth()->user()->id)->first();
+            //dd($showid->id);
+            \App\Episode::updateOrCreate(
+                ['user_id' => auth()->user()->id, 
+                '_id' => $episode['_id']
+                ],
+                $episode);
+    
+        }
+    }
+
+    public function store($id)
+    {
+        
+        $this->saveShow($id);
+        $this->saveSeasons($id);
+        //$this->saveEpisodes($id);
 
         return redirect()->back();
     }
@@ -64,12 +126,17 @@ class TvShowController extends Controller
     public function delete($id)
     {
         try {
-            $show = TvShow::where('show', $id)->where('user_id', auth()->user()->id);
+
+            
+            $show = TvShow::where('id', $id)->where('user_id', auth()->user()->id);
+            
             
             $show->delete();
             
-        } catch (\Throwable $th) {
+            $deletedRows = \App\Episode::where('tv_show_id', $id)->where('user_id', auth()->user()->id)->delete();
             
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
             return redirect()->back()->withErrors($th->getMessage());
         }
 
@@ -93,27 +160,70 @@ class TvShowController extends Controller
         return redirect()->back();        
     }
 
+    public function updateShow($id)
+    {
+        $this->saveShow($id);
+        $this->saveSeasons($id);
+        //$this->saveEpisodes($id);
+
+        return $this->list($id);
+    }
+
+    
+
     public function list($id)
     {
         $show = \Tmdb::getTvApi()->getTvshow($id);
-        
-        $seasons = [];
-        for ($i=1; $i <= $show['number_of_seasons']; $i++) { 
+
+        $ushow = \App\TvShow::where('user_id', auth()->user()->id)->where('show', $id)->first();
+        //dd($ushow);
+        /*$seasons = [];
+        for ($i=1; $i <= $ushow->number_of_seasons; $i++) { 
              $seasons[] = $this->episodesOfSeason($id, $i);
-        }
+        }*/
+
+        $seasons = $this->episodesOfSeason($id, 1);
 
         $tvShow = [ 
-            'show' => $show,
-            'seasons' => $seasons,
+            'show' => $ushow,
+            'seasons' => $seasons->toArray(),
         ];
+
+        //dd($tvShow);
         return $tvShow;
 
     }
 
     public function episodesOfSeason($show, $season)
     {
-        $tvShow = \Tmdb::getTvSeasonApi()->getSeason($show, $season);
-        return $tvShow;
+        //$tvShow = \Tmdb::getTvSeasonApi()->getSeason($show, $season);
+        //return $tvShow;
 
+        $episodes = \App\Season::with('episodes')
+            ->where('tv_show_id', $show)
+            ->where('user_id', auth()->user()->id)
+            //->where('season_number', $season)
+            ->whereHas('episodes', function ($query) {
+                $query->where('watched', false);
+                    //->where('user_id', auth()->user()->id);
+            })
+            ->get();
+
+        
+
+        
+        return $episodes;
+
+
+    }
+
+    public function setWatched(Request $request, \App\Episode $episode)
+    {
+        $episode->watched = $request->check;
+
+        
+        $episode->save();
+
+        return $episode;
     }
 }
