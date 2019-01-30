@@ -128,7 +128,7 @@ class TvShowController extends Controller
         try {
 
             
-            $show = TvShow::where('id', $id)->where('user_id', auth()->user()->id);
+            $show = TvShow::where('show', $id)->where('user_id', auth()->user()->id);
             
             
             $show->delete();
