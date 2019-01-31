@@ -16,6 +16,7 @@ class CreateSeasonsTable extends Migration
         Schema::create('seasons', function (Blueprint $table) {
             $table->increments('id');            
             $table->integer('_id');
+            $table->integer('user_id');
             $table->date('air_date');
             $table->string('name');
             $table->text('overview');

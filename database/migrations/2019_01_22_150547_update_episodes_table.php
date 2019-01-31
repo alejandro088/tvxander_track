@@ -14,8 +14,9 @@ class UpdateEpisodesTable extends Migration
     public function up()
     {
         Schema::table('episodes', function (Blueprint $table) {
-            $table->boolean('watched');
-            $table->boolean('archived');
+            $table->boolean('watched')->default(false);
+            $table->boolean('archived')->default(false);
+            $table->integer('tv_show_id');
         });
     }
 
@@ -30,6 +31,7 @@ class UpdateEpisodesTable extends Migration
         {
             $table->dropColumn('archived');
             $table->dropColumn('watched');
+            $table->dropColumn('tv_show_id');
         });
 
     }

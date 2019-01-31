@@ -15,6 +15,7 @@ class UpdateTvShowsTable extends Migration
     {
         Schema::table('tv_shows', function (Blueprint $table) {
             $table->boolean('archived');
+            $table->longtext('last_episode_to_air');
         });
     }
 
@@ -28,6 +29,7 @@ class UpdateTvShowsTable extends Migration
         Schema::table('tv_shows', function($table)
         {
             $table->dropColumn('archived');
+            $table->dropColumn('last_episode_to_air');
         });
         
     }
