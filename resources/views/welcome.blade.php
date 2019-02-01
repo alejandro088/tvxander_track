@@ -44,7 +44,7 @@
 
                         @foreach ($movies as $movie)
 
-                        {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200) !!}
+                        {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200, 'img-thumbnail') !!}
                         @endforeach
 
                     </div>
@@ -65,7 +65,7 @@
 
                         @foreach ($shows as $show)
                         <a href="{{route('tv.show',$show->getId())}}">
-                            {!! $image->getHtml($show->getPosterImage(), 'w154', null, 200) !!}
+                            {!! $image->getHtml($show->getPosterImage(), 'w154', null, 200, 'img-thumbnail') !!}
                         </a>
                         @endforeach
 

@@ -82,18 +82,17 @@
 
     </div>
 
+    <!-- Scripts JQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <!-- Scripts Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- Add this after vue.js -->
-    <script src="//unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
-    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    
     <!-- Scripts -->
     <script src="https://unpkg.com/feather-icons"></script>
-    <script src="{{ asset('js/dashboard.js') }}" defer></script>
+    <script src="{{asset('js/app.js')}}"></script>
 
     <script>
         $('#search').keypress(function (e) {

@@ -30,7 +30,7 @@ class Episode extends Model
 
     public function serie()
     {
-        return $this->belongsTo('App\Episode','tv_show_id','_id');
+        return $this->belongsTo('App\TvShow','tv_show_id','show');
     }
 
     public function user()

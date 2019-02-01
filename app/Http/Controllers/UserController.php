@@ -23,8 +23,16 @@ class UserController extends Controller
     public function index()
     {
         $shows = Auth::user()->TvShows;
+
+        $episodes = Auth::user()->episodes;
         //dump($shows);
-        return view('home', compact('shows'));
+        return view('home', compact('shows', 'episodes'));
+    }
+
+    public function calendar()
+    {
+        
+        return view('calendar');
     }
 
     public function settings()

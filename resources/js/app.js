@@ -5,9 +5,28 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 
-window.Vue = require('vue');
+//window.Vue = require('vue');
+import Vue from 'vue'
+import axios from 'axios'
+import BootstrapVue from 'bootstrap-vue'
+import Vuetify from 'vuetify'
+import DaySpanVuetify from 'dayspan-vuetify'
+
+Vue.config.productionTip = false
+
+Vue.use(Vuetify);
+
+Vue.use(DaySpanVuetify, {
+  methods: {
+    getDefaultEventColor: () => '#1976d2'
+  }
+});
+
+Vue.use(BootstrapVue);
+
+import {store} from './store/store';
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,7 +39,13 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('tvseason-description', require('./components/TvseasonDescription.vue').default);
+Vue.component('tvseason-mark-watched', require('./components/TvseasonMarkWatched.vue').default);
+Vue.component('tvseason-list-episodes', require('./components/TvseasonListEpisodes.vue').default);
+Vue.component('tvepisode', require('./components/Tvepisode.vue').default);
+Vue.component('tv-calendar', require('./components/Calendar.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,5 +54,40 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    store: store,
+    methods: {
+        episodes: function(show) {
+            
+            this.$store.dispatch('episodes',show);
+        },
+        
+
+
+        update: async function (_evt) {
+            var serie = this.$store.serie;
+
+            _evt.target.disabled = true;
+
+            const data = await axios.get(`/update/${serie}`).then(response => {
+                this.$store.serie = response.data.show;
+                
+
+                var seasons = Object.assign({}, response.data.seasons);
+                
+                this.$store.seasons = seasons;
+
+                
+
+            });
+        }
+    },
+    computed: {
+        serie () {
+          return store.state.serie
+        },
+        seasons () {
+            return store.state.seasons
+          },
+      }
 });
