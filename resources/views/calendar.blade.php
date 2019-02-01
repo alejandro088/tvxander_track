@@ -14,13 +14,10 @@
 
 <div class="container mt-3">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-
-            
+        <div class="col-md-12">        
 
             <div class="row mt-3">
-                    <div id='calendar'></div>
-                
+                    <tv-calendar></tv-calendar>               
             </div>
         </div>           
     </div>
@@ -28,23 +25,13 @@
 @endsection
 
 @section('js')
-<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
-    <script>
-            $('#calendar').fullCalendar({
-                events: [
-                    {
-                    title: 'Event Title1',
-                    start: '2019-02-17T13:13:55.008',
-                    end: '2019-02-19T13:13:55.008'
-                    },
-                    {
-                    title: 'Event Title2',
-                    start: '2019-02-17T13:13:55-0400',
-                    end: '2019-02-19T13:13:55-0400'
-                    }
-            ]
-              });
-    </script>
+    
+<script>
+
+    $('.c-event-container').qtip({ // Grab some elements to apply the tooltip to
+        content: {
+            text: 'My common piece of text here'
+        }
+    })
+</script>
 @endsection

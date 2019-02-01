@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
 
-    protected $fillable = ['option_value'];
+    protected $fillable = ['option_value','option_name','user_id'];
     public static function setLanguage($lang = 'en')
     {
         Setting::updateOrCreate(['option_name' => 'language',

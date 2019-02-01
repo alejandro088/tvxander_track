@@ -11,22 +11,11 @@
 import Vue from 'vue'
 import axios from 'axios'
 import BootstrapVue from 'bootstrap-vue'
-import Vuetify from 'vuetify'
-import DaySpanVuetify from 'dayspan-vuetify'
-
-Vue.config.productionTip = false
-
-Vue.use(Vuetify);
-
-Vue.use(DaySpanVuetify, {
-  methods: {
-    getDefaultEventColor: () => '#1976d2'
-  }
-});
 
 Vue.use(BootstrapVue);
 
 import {store} from './store/store';
+import {router} from './routes';
 
 /**
  * The following block of code may be used to automatically register your
@@ -56,6 +45,7 @@ Vue.component('tv-calendar', require('./components/Calendar.vue').default);
 const app = new Vue({
     el: '#app',
     store: store,
+    router,
     methods: {
         episodes: function(show) {
             

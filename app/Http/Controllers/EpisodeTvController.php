@@ -20,4 +20,21 @@ class EpisodeTvController extends Controller
 
         return $episodes;
     }
+
+    public function list()
+    {
+        $shows = auth()->user()->episodes()->with('serie')->get();
+
+        return $shows;
+    }
+
+    public function watches()
+    {
+        $watches = $this->list()
+            ->where('watched', true)
+            ->sortByDesc('updated_at')
+            ->take(10);
+        
+        return $watches;
+    }
 }

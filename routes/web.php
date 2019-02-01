@@ -13,6 +13,9 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
+Route::get('/tv/all', 'TvShowController@list_shows')->name('tv.list');
+Route::get('/tv/last', 'TvShowController@last_shows')->name('tv.last');
+Route::get('/episodes/all', 'EpisodeTvController@watches')->name('episodes.watches');
 Route::get('/tv/{id}', 'TvShowController@show')->name('tv.show');
 
 Auth::routes();
@@ -22,6 +25,7 @@ Route::get('/settings', 'UserController@settings')->name('user.settings');
 Route::get('/myshows', 'UserController@myshows')->name('user.myshows');
 Route::get('/unwatched', 'UserController@unwatched')->name('user.shows.unwatched');
 Route::get('/calendar', 'UserController@calendar')->name('user.calendar');
+Route::get('/events', 'TvShowController@events')->name('tv.events');
 
 
 Route::post('/settings', 'UserController@settingsStore')->name('settings.store');

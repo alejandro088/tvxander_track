@@ -35,6 +35,7 @@
     <!-- Styles -->
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
     @yield('css')
@@ -84,6 +85,7 @@
 
     <!-- Scripts JQuery -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
     
     <!-- Scripts Bootstrap -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
@@ -93,6 +95,7 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="{{asset('js/app.js')}}"></script>
+    
 
     <script>
         $('#search').keypress(function (e) {

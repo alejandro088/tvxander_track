@@ -58,11 +58,16 @@
                     @endauth
 
                     <div class="rating mt10">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
+                        
+                        @php
+                            $average = number_format($show['vote_average'] / 2);
+                        @endphp
+                        
+                        @for ($i = 0; $i < $average; $i++)
+                            <i class="fa fa-star"></i>
+                        @endfor                      
+                        
+                        
                         <span>{{$show['vote_count']}} Votes</span>
                     </div>
                 </div>

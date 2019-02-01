@@ -8,11 +8,7 @@
                 <div class="card-header">Current Shows</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
+                    
                     <table class="table table-striped">
                         <thead>
                             <th scope="col">Name</th>
@@ -23,7 +19,7 @@
                         <tbody>
                             @forelse ($currentShows as $show)
                             <tr>
-                                <td><strong>{{$show->name}}</strong>
+                                <td><a href="{{route('tv.show',$show->show)}}"><strong>{{$show->name}}</strong></a>
                                         <span>
                                                 <em class="date d-block">You had {{$show->episodes_unwatched}} unwatched episodes!!
                                                 </em>
@@ -88,7 +84,7 @@
                         <tbody>
                             @forelse ($endedShows as $show)
                             <tr>
-                                <td>{{$show->name}}</td>
+                                <td><a href="{{route('tv.show',$show->show)}}"><strong>{{$show->name}}</strong></a></td>
                                 @if ($show->last_episode_to_air != null)
                                 <td><span>
                                         <strong class="number">{{$show->last_episode_to_air['season_number'] . "x" .
@@ -147,7 +143,7 @@
                             <tbody>
                                 @forelse ($canceledShows as $show)
                                 <tr>
-                                    <td>{{$show->name}}</td>
+                                    <td><a href="{{route('tv.show',$show->show)}}"><strong>{{$show->name}}</strong></a></td>
                                     @if ($show->last_episode_to_air != null)
                                     <td><span>
                                             <strong class="number">{{$show->last_episode_to_air['season_number'] . "x" .
@@ -207,7 +203,7 @@
                         <tbody>
                             @forelse ($archivedShows as $show)
                             <tr>
-                                <td>{{$show->name}}</td>
+                                <td><a href="{{route('tv.show',$show->show)}}"><strong>{{$show->name}}</strong></a></td>
                                 @if ($show->last_episode_to_air != null)
                                 <td><span>
                                         <strong class="number">{{$show->last_episode_to_air['season_number'] . "x" .

@@ -26,7 +26,7 @@ class CreateTvShowsTable extends Migration
             $table->string('homepage');
             $table->boolean('in_production');
             $table->date('last_air_date');
-            $table->longtext('next_episode_to_air');
+            $table->longtext('next_episode_to_air')->nullable();
             $table->integer('number_of_episodes');
             $table->integer('number_of_seasons');
             $table->string('original_language');

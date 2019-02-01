@@ -226,4 +226,46 @@ class TvShowController extends Controller
 
         return $episode;
     }
+
+    public function events()
+    {
+        $shows = auth()->user()->TvShows()->with('episodes')->get();
+
+        $events = [];
+
+        foreach ($shows as $show) {
+            $name = $show->name;
+            $episodes = $show->episodes->where('air_date','>',now());
+            foreach ($episodes as $episode) {
+                
+                $events[] = [ 
+                    'title' => "$name {$episode->season_number}x{$episode->episode_number}",
+                    'start' => $episode->air_date,
+                    'url' => "/tv/$episode->tv_show_id",
+                    'description' => $episode->overview,
+                 ];
+            }
+            
+        
+        }
+
+        //dd($events);
+        return $events;
+    }
+
+    public function list_shows($order = 'name', $limit = 10)
+    {
+        $shows = auth()->user()->TvShows;
+
+        return $shows;
+    }
+
+    public function last_shows()
+    {
+        $shows = $this->list_shows()
+            ->sortByDesc('created_at')
+            ->take(5);
+
+        return $shows;
+    }
 }

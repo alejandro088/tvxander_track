@@ -31,91 +31,19 @@
                 <div class="container-fluid">
                     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="#">All shows</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Last episodes</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Last Shows</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Most views</a></li>
+                            <li class="nav-item"><router-link class="nav-link" :to="{name: 'all_shows'}">All Shows</router-link></li>
+                            <li class="nav-item"><router-link class="nav-link" :to="{name: 'last_episodes'}">Last episodes</router-link></li>
+                            <li class="nav-item"><router-link class="nav-link" :to="{name: 'last_shows'}">Last Shows</router-link></li>
+                            <li class="nav-item"><router-link class="nav-link" :to="{name: 'all_shows'}">Most views</router-link></li>
                         </ul>
                     </nav>
                 </div>
             </div>
 
-            <section class="all-shows">
-                {{--order by name --}}
-                <h3 class="text-center mt-3">Todos los programas añadidos ({{$shows->count()}})</h3>
+            <router-view :key="$route.fullPath"></router-view>
 
-                <div class="row col-md-12">
-                    @forelse ($shows->sortBy('name') as $show)
-                    <div class="card pt-2 m-2 col-md-auto">
-                        {!! $image->getHtml($show->poster_path, 'w154', 154, 231) !!}
-                        <div class="card-body">
-                            <p class="card-text"><a href="{{route('tv.show',$show->show)}}">{{$show->name}}</a></p>
-                            <p class="card-text"><small class="text-muted">Episodes watched:
-                                    {{$show->episodes_watched}}</small></p>
-                        </div>
-                    </div>
-                    @empty
-                    <span>En este momento no tienes Shows registrados</span>
-                    @endforelse
-                </div>
-            </section>
-
-            <section class="last-episodes-views">
-                {{--order by updated_at --}}
-
-                
-                <h3 class="text-center mt-3">Últimos episodios vistos</h3>
-
-                <div class="row col-md-12">
+                {{--  <section class="shows-most-views">
                         
-                    @forelse ($episodes->where('watched', true)->sortByDesc('updated_at')->take(15) as $episode)
-                    
-                    <div class="card pt-2 m-2 col-md-auto">
-                        {!! $image->getHtml($episode->serie->poster_path, 'w154', 154, 231) !!}
-                        <div class="card-body">
-                            <p class="card-text"><a href="{{route('tv.show',$episode->serie->show)}}">{{$episode->serie->name}}</a></p>
-                            <p class="card-text"><small class="text-muted">
-                                    {{$episode->name}} {{$episode->season_number}}x{{$episode->episode_number}}</small></p>
-                                    
-                                    <p class="date d-block">
-                                        {{\Carbon\Carbon::parse($episode->updated_at)->toFormattedDateString()}}
-                                    </p> 
-                                    <p class="date d-block">
-                                        {{\Carbon\Carbon::parse($episode->updated_at)->diffForHumans(now())}}
-                                    </p>
-                                    
-                        </div>
-                    </div>
-                    @empty
-                    <span>En este momento no tienes Shows registrados</span>
-                    @endforelse
-                </div>
-            </section>
-
-            <section class="last-shows-added">
-                    {{--order by name --}}
-                    <h3 class="text-center mt-3">Últimos programas añadidos</h3>
-    
-                    <div class="row col-md-12">
-                        @forelse ($shows->sortByDesc('created_at') as $show)
-                        <div class="card pt-2 m-2 col-md-auto">
-                            {!! $image->getHtml($show->poster_path, 'w154', 154, 231) !!}
-                            <div class="card-body">
-                                <p class="card-text"><a href="{{route('tv.show',$show->show)}}">{{$show->name}}</a></p>
-                                <p class="card-text"><small class="text-muted">Añadido
-                                        <span class="date">
-                                                {{\Carbon\Carbon::parse($show->created_at)->diffForHumans(now())}}
-                                            </span></small></p>
-                            </div>
-                        </div>
-                        @empty
-                        <span>En este momento no tienes Shows registrados</span>
-                        @endforelse
-                    </div>
-                </section>
-
-                <section class="shows-most-views">
-                        {{--order by time --}}
                         <h3 class="text-center mt-3">Programas más vistos</h3>
         
                         <div class="row col-md-12">
@@ -132,7 +60,7 @@
                             <span>En este momento no tienes Shows registrados</span>
                             @endforelse
                         </div>
-                    </section>
+                    </section>  --}}
 
             
 
