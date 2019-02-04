@@ -30,7 +30,7 @@
             
 
             <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('browse')}}">
                       <span data-feather="eye"></span>
                       Browse
                     </a>

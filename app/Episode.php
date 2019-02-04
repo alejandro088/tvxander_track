@@ -25,7 +25,7 @@ class Episode extends Model
 
     public function season()
     {
-        return $this->belongsTo('App\Season','season_id','_id');
+        return $this->belongsTo('App\Season','season_id','id');
     }
 
     public function serie()

@@ -262,9 +262,11 @@ class TvShowController extends Controller
 
     public function last_shows()
     {
-        $shows = $this->list_shows()
-            ->sortByDesc('created_at')
-            ->take(5);
+
+        $shows = TvShow::where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'DESC')
+            ->limit(5)
+            ->get();
 
         return $shows;
     }

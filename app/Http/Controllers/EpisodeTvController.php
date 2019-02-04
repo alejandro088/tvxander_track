@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Episode;
 use Illuminate\Http\Request;
 
 class EpisodeTvController extends Controller
@@ -30,10 +31,13 @@ class EpisodeTvController extends Controller
 
     public function watches()
     {
-        $watches = $this->list()
+
+        $watches = Episode::with('serie', 'season')
+            ->where('user_id', auth()->user()->id)
             ->where('watched', true)
-            ->sortByDesc('updated_at')
-            ->take(10);
+            ->orderBy('updated_at', 'DESC')
+            ->limit(10)
+            ->get();
         
         return $watches;
     }

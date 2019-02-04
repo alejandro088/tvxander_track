@@ -18,6 +18,8 @@ Route::get('/tv/last', 'TvShowController@last_shows')->name('tv.last');
 Route::get('/episodes/all', 'EpisodeTvController@watches')->name('episodes.watches');
 Route::get('/tv/{id}', 'TvShowController@show')->name('tv.show');
 
+Route::get('/tmdb/{function}/{params?}', 'TmdbController@__call')->name('tv.api');
+
 Auth::routes();
 
 Route::get('/profile', 'UserController@index')->name('user.profile');
@@ -26,6 +28,13 @@ Route::get('/myshows', 'UserController@myshows')->name('user.myshows');
 Route::get('/unwatched', 'UserController@unwatched')->name('user.shows.unwatched');
 Route::get('/calendar', 'UserController@calendar')->name('user.calendar');
 Route::get('/events', 'TvShowController@events')->name('tv.events');
+
+
+Route::get('/browse/{action}/{name}/{params?}', 'HomeController@action')->name('browse.list');
+//Route::get('/browse/{tv?}', 'HomeController@browse')->name('browse');
+Route::get('/browse', 'HomeController@browse')->name('browse');
+
+
 
 
 Route::post('/settings', 'UserController@settingsStore')->name('settings.store');
