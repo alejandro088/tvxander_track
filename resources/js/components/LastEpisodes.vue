@@ -19,10 +19,10 @@
                                     {{episode.name}} {{episode.season_number}}x{{episode.episode_number}}</small></p>
                                     
                                     <p class="date d-block">
-                                        {{episode.updated_at}}
+                                        {{dateFormat(episode.updated_at)}}
                                     </p> 
                                     <p class="date d-block">
-                                        {{episode.updated_at}}
+                                        {{dateFromNow(episode.updated_at)}}
                                     </p>
                                     
                         </div>
@@ -34,6 +34,7 @@
 
 <script>
 import axios from 'axios'
+var moment = require('moment');
 
 export default {
     data() {
@@ -50,6 +51,14 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
+    },
+    methods: {
+        dateFromNow: function(date) {
+            return moment(date).fromNow();
+        },
+        dateFormat: function(date) {
+            return moment(date).format("MMM DD, YYYY");
         }
+    }
 }
 </script>

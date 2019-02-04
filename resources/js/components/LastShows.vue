@@ -12,7 +12,7 @@
                                 <p class="card-text"><a :href="'/tv/'+show.show">{{show.name}}</a></p>
                                 <p class="card-text"><small class="text-muted">Añadido
                                         <span class="date">
-                                                {{show.created_at}}
+                                                {{dateFromNow(show.created_at)}}
                                             </span></small></p>
                             </div>
                         </div>
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+var moment = require('moment');
 
 export default {
     data() {
@@ -34,11 +35,23 @@ export default {
             axios.get('/tv/last')
                 .then(res => {
                     this.shows = res.data;
-                    console.log(this.shows);                    
+                    console.log(res.data);
+                    
+                    
+                    
                 })
                 .catch(err => {
                     console.log(err);
                 });
+    },
+    methods: {
+        dateFromNow: function(date) {
+            return moment(date).fromNow();
+        },
+        dateFormat: function(date) {
+            return moment(date).format("MMM DD, YYYY");
         }
+    },
+    
 }
 </script>

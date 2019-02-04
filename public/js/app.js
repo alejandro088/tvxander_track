@@ -2723,6 +2723,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2738,6 +2741,14 @@ __webpack_require__.r(__webpack_exports__);
     }).catch(function (err) {
       console.log(err);
     });
+  },
+  methods: {
+    dateFromNow: function dateFromNow(date) {
+      return moment(date).fromNow();
+    },
+    dateFormat: function dateFormat(date) {
+      return moment(date).format("MMM DD, YYYY");
+    }
   }
 });
 
@@ -2778,6 +2789,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2789,10 +2803,18 @@ __webpack_require__.r(__webpack_exports__);
 
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/tv/last').then(function (res) {
       _this.shows = res.data;
-      console.log(_this.shows);
+      console.log(res.data);
     }).catch(function (err) {
       console.log(err);
     });
+  },
+  methods: {
+    dateFromNow: function dateFromNow(date) {
+      return moment(date).fromNow();
+    },
+    dateFormat: function dateFormat(date) {
+      return moment(date).format("MMM DD, YYYY");
+    }
   }
 });
 
@@ -69687,7 +69709,7 @@ var render = function() {
                 _c("p", { staticClass: "date d-block" }, [
                   _vm._v(
                     "\n                                " +
-                      _vm._s(episode.updated_at) +
+                      _vm._s(_vm.dateFormat(episode.updated_at)) +
                       "\n                            "
                   )
                 ]),
@@ -69695,7 +69717,7 @@ var render = function() {
                 _c("p", { staticClass: "date d-block" }, [
                   _vm._v(
                     "\n                                " +
-                      _vm._s(episode.updated_at) +
+                      _vm._s(_vm.dateFromNow(episode.updated_at)) +
                       "\n                            "
                   )
                 ])
@@ -69768,7 +69790,7 @@ var render = function() {
                     _c("span", { staticClass: "date" }, [
                       _vm._v(
                         "\n                                        " +
-                          _vm._s(show.created_at) +
+                          _vm._s(_vm.dateFromNow(show.created_at)) +
                           "\n                                    "
                       )
                     ])

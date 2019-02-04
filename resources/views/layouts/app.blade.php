@@ -38,6 +38,47 @@
     <link rel="stylesheet" href="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.css">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
+    <style>
+
+        
+        
+        .dropdown {
+            background:#000;
+            
+            border-radius:4px;
+            width:200px;    
+        }
+        .dropdown-menu>li>a {
+            color:#428bca;
+        }
+        .dropdown div.dropdown-menu {
+            border-radius:4px;
+            box-shadow:none;
+            margin-top:20px;
+            width:300px;
+        }
+        .dropdown div.dropdown-menu:before {
+            content: "";
+            border-bottom: 10px solid #fff;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            z-index: 10;
+        }
+        .dropdown div.dropdown-menu:after {
+            content: "";
+            border-bottom: 12px solid #ccc;
+            border-right: 12px solid transparent;
+            border-left: 12px solid transparent;
+            position: absolute;
+            top: -12px;
+            right: 14px;
+            z-index: 9;
+        }
+    </style>
+
     @yield('css')
 </head>
 

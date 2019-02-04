@@ -40,22 +40,7 @@
                     Status: {{$show['status']}}
 
 
-                    @auth
-
-                    @if(auth()->user()->hasShow($show['id']))
-                    <form action="/tv/{{$show['id']}}/delete" method="post" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                    </form>
-                    @else
-                    <form action="/tv/{{$show['id']}}/add" method="post" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-heart"></i></button>
-                    </form>
-                    @endif
-
-                    @endauth
+                   
 
                     <div class="rating mt10">
                         
@@ -82,7 +67,28 @@
 
 <!-- =============== End OF MOVIE DETAIL INTRO 2 =============== -->
 
-<div class="storyline">
+<div class="storyline mt-4">
+
+        @auth
+        <div class="float-right">
+
+        @if(auth()->user()->hasShow($show['id']))
+        <form action="/tv/{{$show['id']}}/delete" method="post" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Remove from my list</button>
+        </form>
+        @else
+        <form action="/tv/{{$show['id']}}/add" method="post" class="d-inline">
+            @csrf
+            <button type="submit" class="btn btn-primary"><i class="fa fa-heart"></i> Add to my list</button>
+        </form>
+        @endif
+
+        </div>
+
+        @endauth
+
     <h3 class="title">Overview</h3>
 
     <p>{{$show['overview']}}</p>

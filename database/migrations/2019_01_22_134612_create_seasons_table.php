@@ -17,10 +17,10 @@ class CreateSeasonsTable extends Migration
             $table->increments('id');            
             $table->integer('_id');
             $table->integer('user_id');
-            $table->date('air_date');
+            $table->date('air_date')->nullable();
             $table->string('name');
             $table->text('overview');
-            $table->string('poster_path');
+            $table->string('poster_path')->nullable();
             $table->integer('season_number');
 
             $table->integer('tv_show_id');

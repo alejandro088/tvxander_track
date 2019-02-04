@@ -17,7 +17,7 @@ class CreateEpisodesTable extends Migration
             $table->increments('id');
             $table->integer('_id');
             $table->integer('user_id');
-            $table->date('air_date');
+            $table->date('air_date')->nullable();
             $table->longtext('crew');
             $table->integer('episode_number');
             $table->longtext('guest_stars');
