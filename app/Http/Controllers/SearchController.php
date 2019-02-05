@@ -21,11 +21,15 @@ class SearchController extends Controller
 
         $query = $request->input('q');
 
-        $searchQuery = new TvSearchQuery();
-        $searchQuery->searchType();
-
-        $movies = $this->results->searchTv($query, $searchQuery);
-        return view('search', compact('movies', 'query'));
+        //$searchQuery = new TvSearchQuery();
+        $searchQuery = new \Tmdb\Model\Search\SearchQuery\KeywordSearchQuery();
+        $searchQuery->page(1);
+        //$searchQuery->searchType();
+        
+        
+        //dd($result);
+        $find = $this->results->searchMulti($query, $searchQuery);
+        return view('search', compact('find', 'query'));
     }
 
 }

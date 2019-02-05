@@ -7,7 +7,7 @@
 @section('content')
 <div class="show">
     <!-- content here -->
-    @include('partials.tv.details')
+    @include('movie.details')
 </div>
 @endsection
 

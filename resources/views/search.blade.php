@@ -16,10 +16,9 @@
 
                     <div class="content">
 
-                        @foreach ($movies as $movie)
-                        <a href="{{route('tv.show',$movie->getId())}}">
-                            {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200) !!}
-                        </a>
+                        @foreach ($find as $item)
+                            @include("result.item.".explode('\\',get_class($item))[2])
+                        
                         @endforeach
 
                     </div>

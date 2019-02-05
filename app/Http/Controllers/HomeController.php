@@ -33,7 +33,7 @@ class HomeController extends Controller
         return view('browse');
     }
 
-    public function action($info, $function, $params = null)
+    public function actionTv($function, $params = null)
     {
         if($params){
             
@@ -50,17 +50,46 @@ class HomeController extends Controller
             $list = \Tmdb::getTvApi()->$function($options);
         }
         else {
-            if ($info == 'tv')
+            if ($function == 'discover')
+                
+                $list = \Tmdb::getDiscoverApi()->discoverTv();
+            else 
                 $list = \Tmdb::getTvApi()->$function();
-            else if($info == 'movie')
-               $list = \Tmdb::getMoviesApi()->$function();            
-            else if($info == 'discover')
-                $list = \Tmdb::getDiscoverApi()->$function();
+                
             
         }
 
         //dd($info);
 
-        return view('browse', compact('list'));
+        return view('tv.browse', compact('list'));
+    }
+
+    public function actionMovie($function, $params = null)
+    {
+        if($params){
+            
+            $params = explode('&',$params);
+        
+
+            foreach ($params as $key => $value) {
+                $temp = explode('=',$value);
+                $options[$temp[0]] = $temp[1];
+            }
+            //dd($options);
+        
+        
+            $list = \Tmdb::getTvApi()->$function($options);
+        }
+        else {
+            if ($function == 'discover')
+                
+                $list = \Tmdb::getDiscoverApi()->discoverMovies();
+            else 
+                $list = \Tmdb::getMoviesApi()->$function();
+                
+            
+        }
+
+        return view('movie.browse', compact('list'));
     }
 }

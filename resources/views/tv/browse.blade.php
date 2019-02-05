@@ -33,7 +33,9 @@
             </div>
 
             <router-view :key="$route.fullPath"></router-view>
-           
+            @if (isset($list))
+                @includeIf('tv.list', $list)    
+            @endif
             
 
             

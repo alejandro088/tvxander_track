@@ -21,7 +21,19 @@ class TvShowController extends Controller
     {
         $show = \Tmdb::getTvApi()->getTvshow($id);
 
-        return view('tv.show', compact('show'));
+        
+        $cast = \Tmdb::getTvApi()->getCredits($id);
+        
+        $director = array_filter($cast['crew'], function($v, $k) {
+            
+            return $v['job'] == 'Director';
+        }, ARRAY_FILTER_USE_BOTH);
+        
+        $recommendations = \Tmdb::getTvApi()->getRecommendations($id);
+        //dd($recommendations);
+
+        return view('tv.show', 
+            compact('show', 'cast', 'director', 'recommendations'));
     }
 
     private function fieldDataSave($field, $tvshow)

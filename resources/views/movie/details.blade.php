@@ -20,7 +20,7 @@
 
 
                 <div class="movie-details">
-                    <h3 class="title">{{$show['original_name']}}</h3>
+                    <h3 class="title">{{$show['title']}}</h3>
 
                     <ul class="movie-subtext">
                         <li>
@@ -28,19 +28,11 @@
                             {{$item['name']}},
                             @endforeach
                         </li>
-                        <li>{{$show['first_air_date']}}</li>
+                        <li>{{\Carbon\Carbon::parse($show['release_date'])->toFormattedDateString()}}</li>
 
-                    </ul>
-
-                    <ul class="movie-subtext">
-                        <li>{{$show['number_of_episodes']}} episodes</li>
-                        <li>{{$show['number_of_seasons']}} seasons</li>
                     </ul>
 
                     Status: {{$show['status']}}
-
-
-
 
                     <div class="rating mt10">
 
@@ -69,25 +61,6 @@
     <div class="col-md-8">
         <div class="storyline mt-4">
 
-            @auth
-            <div class="float-right">
-
-                @if(auth()->user()->hasShow($show['id']))
-                <form action="/tv/{{$show['id']}}/delete" method="post" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Remove from my list</button>
-                </form>
-                @else
-                <form action="/tv/{{$show['id']}}/add" method="post" class="d-inline">
-                    @csrf
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-heart"></i> Add to my list</button>
-                </form>
-                @endif
-
-            </div>
-
-            @endauth
 
             <h3 class="title">Overview</h3>
 
@@ -99,8 +72,8 @@
 
     </div>
     <div class="col-md-4">
-        @include('partials.tv.widget.details')
+        @include('movie.widget.info')
     </div>
 </div>
 
-@include('partials.tv.recommendations')
+@include('movie.recommendations')

@@ -11,7 +11,7 @@
         <div class="content">
 
             @foreach ($list['results'] as $item)
-            <a href="{{route('tv.show',$item['id'])}}">
+            <a href="{{route('movie.show',$item['id'])}}">
             {!! $image->getHtml($item['poster_path'], 'w154', null, 200, 'img-thumbnail') !!}
             </a>
             @endforeach
