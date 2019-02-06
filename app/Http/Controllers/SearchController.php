@@ -19,17 +19,18 @@ class SearchController extends Controller
     {
         // returns information of a movie
 
-        $query = $request->input('q');
-
+        $page = $request->query('page') ? $request->query('page') : 1;
+        $query = $request->query('q');
+        
         //$searchQuery = new TvSearchQuery();
         $searchQuery = new \Tmdb\Model\Search\SearchQuery\KeywordSearchQuery();
-        $searchQuery->page(1);
+        $searchQuery->page($page);
         //$searchQuery->searchType();
         
         
         //dd($result);
         $find = $this->results->searchMulti($query, $searchQuery);
-        return view('search', compact('find', 'query'));
+        return view('search', compact('find', 'query', 'request', 'page'));
     }
 
 }

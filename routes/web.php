@@ -18,6 +18,7 @@ Route::get('/tv/last', 'TvShowController@last_shows')->name('tv.last');
 Route::get('/episodes/all', 'EpisodeTvController@watches')->name('episodes.watches');
 Route::get('/tv/{id}', 'TvShowController@show')->name('tv.show');
 Route::get('/movie/{id}', 'MovieController@show')->name('movie.show');
+Route::get('/person/{id}', 'PersonController@show')->name('person.show');
 
 Route::get('/tmdb/{function}/{params?}', 'TmdbController@__call')->name('tv.api');
 

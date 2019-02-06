@@ -36,12 +36,7 @@
 
                     <div class="rating mt10">
 
-                        @php
-                        $average = number_format($show['vote_average'] / 2);
-                        @endphp
-
-                        @for ($i = 0; $i < $average; $i++) <i class="fa fa-star"></i>
-                            @endfor
+                            {!!stars($show['vote_average'])!!}
 
 
                             <span>{{$show['vote_count']}} Votes</span>
