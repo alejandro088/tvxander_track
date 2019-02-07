@@ -23,16 +23,56 @@
 
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="search?q={{$request->query('q')}}&page={{$page-1}}" tabindex="-1">Previous</a>
+                            
+                                @php
+                                    $total = $find->getTotalPages();
+                                    if($total > 5){
+                                        $init = $page;
+                                        $end = $page + 5;
+                                        if ($end > $total)
+                                            $end = $total;
+                                        if($total-$page < 2 )
+                                            //total = 162, page= 160 diff=2
+                                            // page=8, 6 7 8 9 10
+                                            $init = $page-(4-($total-$page));
+                                        elseif($page <= 2){
+                                            //page=1, 1 2 3 4 5 
+                                            //page=2, 1 2 3 4 5
+                                            $init = 1;
+                                            $end = 5;
+                                        }
+                                        else {
+                                            $init = $page - 2;
+                                            $end = $page + 2; 
+                                        }
+                                    } else {
+                                        $init = 1;
+                                        $end = $total;
+                                    }
+                                @endphp
+                                @if($page != 1 )
+                                <li class="page-item">
+                                    <a class="page-link" href="search?q={{$request->query('q')}}&page={{$page-1}}" tabindex="-1">Previous</a>
                                 </li>
-                                @for ($i = 1; $i <= $find->getTotalPages(); $i++)
-                                    
-                            <li class="page-item"><a class="page-link" href="search?q={{$request->query('q')}}&page={{$i}}">{{$i}}</a></li>
+                                @endif
+                                @if($init != 1 )
+                                <li class="page-item">
+                                        <a class="page-link" href="#">...</a>
+                                </li>
+                                @endif
+                                @for ($i = $init; $i <= $end; $i++)                                    
+                                    <li class="page-item"><a class="page-link" href="search?q={{$request->query('q')}}&page={{$i}}">{{$i}}</a></li>
                                 @endfor
+                                @if($end != $total )
+                                <li class="page-item">
+                                        <a class="page-link" href="#">...</a>
+                                </li>
+                                @endif
+                                @if($page != $total )
                                 <li class="page-item">
                                 <a class="page-link" href="search?q={{$request->query('q')}}&page={{$page+1}}">Next</a>
                                 </li>
+                                @endif
                             </ul>
                         </nav>
 

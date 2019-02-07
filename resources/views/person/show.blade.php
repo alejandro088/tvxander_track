@@ -38,16 +38,32 @@
     <div class="row">
         <div class="container">
         <h6>Cast credits</h6>
+
         
         @foreach ($person->getCombinedCredits()->cast as $item)
-            <h5>{{$item->getOriginalTitle()}} on {{$item->getReleaseDate() ? date_format($item->getReleaseDate(),'Y') : ''}}</h5>
-            <p>Starring as {{$item->getCharacter()}}</p>    
+        
+            
+            @if($item->getMediaType() == 'movie')
+            <h5><a href="{{route('movie.show', $item->getId())}}">{{$item->getOriginalTitle()}}</a> on {{$item->getReleaseDate() ? date_format($item->getReleaseDate(),'Y') : ''}}</h5>
+            <p>Starring as {{$item->getCharacter()}}</p>
+            @elseif($item->getMediaType() == 'tv')
+            
+            <h5><a href="{{route('tv.show', $item->getId())}}">{{$item->getOriginalName()}}</a> on 
+                    {{\Carbon\Carbon::parse($item->getFirstAirDate())->toFormattedDateString()}}
+            </h5>
+            <p>Starring as {{$item->getCharacter()}} - ({{$item->getEpisodeCount()}} episodes)</p>
+            @php 
+            $credits = getCredits($item->getCreditId());
+            //dd($credits);
+            @endphp
+            @foreach ($credits['media']['episodes'] as $episode)
+                <p>Episode: {{$episode['season_number']}}x{{$episode['episode_number']}}</p>
+            @endforeach
+            
+            
+            @endif
         @endforeach
         </div>
     </div>
 </div>
-@endsection
-
-@section('js')
-    <script src="http://cariera.co/templates/movify/assets/js/owl.carousel.min.js"></script>
 @endsection

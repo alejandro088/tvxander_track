@@ -43,7 +43,7 @@
                     <div class="content">
 
                         @foreach ($movies as $movie)
-                        <a href="{{route('movie.show',$show->getId())}}">
+                        <a href="{{route('movie.show',$movie->getId())}}">
                         {!! $image->getHtml($movie->getPosterImage(), 'w154', null, 200, 'img-thumbnail') !!}
                         </a>
                         @endforeach

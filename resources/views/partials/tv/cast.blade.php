@@ -4,7 +4,7 @@
             
             @foreach ($cast['cast'] as $item)
             <div class="col-md-4">
-                    <a href="{{route(person.show, $item['id'])}}">
+                    <a href="{{route('person.show', $item['id'])}}">
                         <span class="circle-img">
                             <img class="img-thumbnail" style="height: 154px;" src="http://image.tmdb.org/t/p/w154{{$item['profile_path']}}"
                                 alt="">
