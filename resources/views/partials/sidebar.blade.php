@@ -7,13 +7,13 @@
                 Main Page <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{route('user.calendar')}}">
-                <span data-feather="calendar"></span>
-                Calendar
-              </a>
-            </li>
             @auth
+             <li class="nav-item">
+                <a class="nav-link" href="{{route('user.calendar')}}">
+                  <span data-feather="calendar"></span>
+                  Calendar
+                </a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{route('user.myshows')}}">
                   <span data-feather="star"></span>

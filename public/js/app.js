@@ -2935,6 +2935,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2952,6 +2954,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['season'],
   methods: {
@@ -2965,7 +2968,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.post("/season/".concat(season['id'], "/watched"), {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/season/".concat(season['id'], "/watched"), {
                   check: e.target.checked
                 }, {
                   headers: {
@@ -85019,19 +85022,20 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_1___default.a({
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                serie = this.$store.serie;
+                serie = this.$store.state.serie;
+                console.log(serie);
                 _evt.target.disabled = true;
-                _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/update/".concat(serie)).then(function (response) {
+                _context.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/update/".concat(serie.show)).then(function (response) {
                   _this.$store.serie = response.data.show;
                   var seasons = Object.assign({}, response.data.seasons);
                   _this.$store.seasons = seasons;
                 });
 
-              case 4:
+              case 5:
                 data = _context.sent;
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -85802,7 +85806,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laragon\www\tvxander\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\tvxander_track\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

@@ -44,7 +44,7 @@
                                 botón de arriba.</span></p>
                     </div>
                 </div>
-                <pre>@{{ this.$store.state }}</pre>
+                
 
             </div>
         </div>

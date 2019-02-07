@@ -55,11 +55,12 @@ const app = new Vue({
 
 
         update: async function (_evt) {
-            var serie = this.$store.serie;
+            var serie = this.$store.state.serie;
+            console.log(serie);
 
             _evt.target.disabled = true;
 
-            const data = await axios.get(`/update/${serie}`).then(response => {
+            const data = await axios.get(`/update/${serie.show}`).then(response => {
                 this.$store.serie = response.data.show;
                 
 
