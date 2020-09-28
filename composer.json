@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "webxander/tvxander",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "TVXander App.",
     "keywords": [
         "framework",
         "laravel"
