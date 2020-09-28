@@ -2,8 +2,6 @@
 
         <section class="last-episodes-views">
                 
-
-                
                 <h3 class="text-center mt-3">Últimos episodios vistos</h3>
 
                 <div class="row col-md-12">
@@ -12,7 +10,7 @@
                             v-bind:key="index"
                             v-for="(episode, index) in episodes">
                         
-                        <img :src="'http://image.tmdb.org/t/p/w154'+episode.serie.poster_path" class="img-thumbnail" />
+                        <img :src="'https://image.tmdb.org/t/p/w154'+episode.serie.poster_path" class="img-thumbnail" />
                         <div class="card-body">
                             <p class="card-text"><a :href="'/tv/'+episode.serie.show">{{episode.serie.name}}</a></p>
                             <p class="card-text"><small class="text-muted">

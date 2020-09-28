@@ -12,5 +12,5 @@
 @endsection
 
 @section('js')
-    <script src="http://cariera.co/templates/movify/assets/js/owl.carousel.min.js"></script>
+    <script src="//cariera.co/templates/movify/assets/js/owl.carousel.min.js"></script>
 @endsection

@@ -7,7 +7,7 @@
                     
                     <div class="card pt-2 m-2 col-md-auto" v-bind:key="index" v-for="(show, index) in shows">
                          <!-- $image->getHtml($show->poster_path, 'w154', 154, 231) -->
-                        <img :src="'http://image.tmdb.org/t/p/w154'+show.poster_path" class="img-thumbnail" />
+                        <img :src="'https://image.tmdb.org/t/p/w154'+show.poster_path" class="img-thumbnail" />
                         <div class="card-body">
                             <p class="card-text"><a :href="'/tv/'+show.show">{{show.name}}</a></p>
                             <p class="card-text"><small class="text-muted">Episodes watched:
