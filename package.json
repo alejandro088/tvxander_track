@@ -1,4 +1,7 @@
 {
+    "name": "webxander/tvxander",
+    "version": "1.0.1",
+    "description": "TVXander App",
     "private": true,
     "scripts": {
         "dev": "npm run development",
