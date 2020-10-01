@@ -1,6 +1,6 @@
 # TvXander Track
 
-Comming soon, the next release.. here [https://github.com/alejandro088/tvxander](https://github.com/alejandro088/tvxander)
+Comming soon, the next release.. 
 
 ## About
 
