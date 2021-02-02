@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -8,16 +10,25 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- CSS files -->
+        <link rel="stylesheet" href="css/plugins.css">
+        <link rel="stylesheet" href="css/style.css">
+
 
         <!-- Scripts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+        @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         @inertia
+
+        <script src="js/jquery.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/plugins2.js"></script>
+        <script src="js/custom.js"></script>
     </body>
 </html>

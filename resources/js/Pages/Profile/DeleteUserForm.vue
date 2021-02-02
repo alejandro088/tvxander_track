@@ -20,7 +20,7 @@
             </div>
 
             <!-- Delete Account Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingUserDeletion" @close="confirmingUserDeletion = false">
+            <jet-dialog-modal :show="confirmingUserDeletion" @close="closeModal">
                 <template #title>
                     Delete Account
                 </template>
@@ -34,12 +34,12 @@
                                     v-model="form.password"
                                     @keyup.enter.native="deleteUser" />
 
-                        <jet-input-error :message="form.error('password')" class="mt-2" />
+                        <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="confirmingUserDeletion = false">
+                    <jet-secondary-button @click.native="closeModal">
                         Nevermind
                     </jet-secondary-button>
 
@@ -53,18 +53,16 @@
 </template>
 
 <script>
-    import JetActionSection from './../../Jetstream/ActionSection'
-    import JetButton from './../../Jetstream/Button'
-    import JetDialogModal from './../../Jetstream/DialogModal'
-    import JetDangerButton from './../../Jetstream/DangerButton'
-    import JetInput from './../../Jetstream/Input'
-    import JetInputError from './../../Jetstream/InputError'
-    import JetSecondaryButton from './../../Jetstream/SecondaryButton'
+    import JetActionSection from '@/Jetstream/ActionSection'
+    import JetDialogModal from '@/Jetstream/DialogModal'
+    import JetDangerButton from '@/Jetstream/DangerButton'
+    import JetInput from '@/Jetstream/Input'
+    import JetInputError from '@/Jetstream/InputError'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 
     export default {
         components: {
             JetActionSection,
-            JetButton,
             JetDangerButton,
             JetDialogModal,
             JetInput,
@@ -75,36 +73,33 @@
         data() {
             return {
                 confirmingUserDeletion: false,
-                deleting: false,
 
                 form: this.$inertia.form({
-                    '_method': 'DELETE',
                     password: '',
-                }, {
-                    bag: 'deleteUser'
                 })
             }
         },
 
         methods: {
             confirmUserDeletion() {
-                this.form.password = '';
-
                 this.confirmingUserDeletion = true;
 
-                setTimeout(() => {
-                    this.$refs.password.focus()
-                }, 250)
+                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             deleteUser() {
-                this.form.post('/user', {
-                    preserveScroll: true
-                }).then(response => {
-                    if (! this.form.hasErrors()) {
-                        this.confirmingUserDeletion = false;
-                    }
+                this.form.delete(route('current-user.destroy'), {
+                    preserveScroll: true,
+                    onSuccess: () => this.closeModal(),
+                    onError: () => this.$refs.password.focus(),
+                    onFinish: () => this.form.reset(),
                 })
+            },
+
+            closeModal() {
+                this.confirmingUserDeletion = false
+
+                this.form.reset()
             },
         },
     }

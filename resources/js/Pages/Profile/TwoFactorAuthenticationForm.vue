@@ -31,7 +31,7 @@
                         </p>
                     </div>
 
-                    <div class="mt-4" v-html="qrCode">
+                    <div class="mt-4 dark:p-4 dark:w-56 dark:bg-white" v-html="qrCode">
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="grid gap-1 max-w-xl mt-4 px-4 py-4 font-mono text-sm bg-gray-100 rounded-lg">
-                        <div v-for="code in recoveryCodes">
+                        <div v-for="code in recoveryCodes" :key="code">
                             {{ code }}
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                     </jet-confirms-password>
 
                     <jet-confirms-password @confirmed="showRecoveryCodes">
-                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length == 0">
+                        <jet-secondary-button class="mr-3" v-if="recoveryCodes.length === 0">
                             Show Recovery Codes
                         </jet-secondary-button>
                     </jet-confirms-password>
@@ -87,11 +87,11 @@
 </template>
 
 <script>
-    import JetActionSection from './../../Jetstream/ActionSection'
-    import JetButton from './../../Jetstream/Button'
-    import JetConfirmsPassword from './../../Jetstream/ConfirmsPassword'
-    import JetDangerButton from './../../Jetstream/DangerButton'
-    import JetSecondaryButton from './../../Jetstream/SecondaryButton'
+    import JetActionSection from '@/Jetstream/ActionSection'
+    import JetButton from '@/Jetstream/Button'
+    import JetConfirmsPassword from '@/Jetstream/ConfirmsPassword'
+    import JetDangerButton from '@/Jetstream/DangerButton'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 
     export default {
         components: {
@@ -118,13 +118,11 @@
 
                 this.$inertia.post('/user/two-factor-authentication', {}, {
                     preserveScroll: true,
-                }).then(() => {
-                    return Promise.all([
+                    onSuccess: () => Promise.all([
                         this.showQrCode(),
-                        this.showRecoveryCodes()
-                    ])
-                }).then(() => {
-                    this.enabling = false
+                        this.showRecoveryCodes(),
+                    ]),
+                    onFinish: () => (this.enabling = false),
                 })
             },
 
@@ -154,15 +152,14 @@
 
                 this.$inertia.delete('/user/two-factor-authentication', {
                     preserveScroll: true,
-                }).then(() => {
-                    this.disabling = false
+                    onSuccess: () => (this.disabling = false),
                 })
             },
         },
 
         computed: {
             twoFactorEnabled() {
-                return ! this.enabling && this.$page.user.two_factor_enabled
+                return ! this.enabling && this.$page.props.user.two_factor_enabled
             }
         }
     }

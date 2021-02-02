@@ -10,12 +10,12 @@
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
-                If necessary, you may logout of all of your other browser sessions across all of your devices. If you feel your account has been compromised, you should also update your password.
+                If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.
             </div>
 
             <!-- Other Browser Sessions -->
             <div class="mt-5 space-y-6" v-if="sessions.length > 0">
-                <div class="flex items-center" v-for="session in sessions">
+                <div class="flex items-center" v-for="(session, i) in sessions" :key="i">
                     <div>
                         <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor" class="w-8 h-8 text-gray-500" v-if="session.agent.is_desktop">
                             <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -54,7 +54,7 @@
             </div>
 
             <!-- Logout Other Devices Confirmation Modal -->
-            <jet-dialog-modal :show="confirmingLogout" @close="confirmingLogout = false">
+            <jet-dialog-modal :show="confirmingLogout" @close="closeModal">
                 <template #title>
                     Logout Other Browser Sessions
                 </template>
@@ -68,12 +68,12 @@
                                     v-model="form.password"
                                     @keyup.enter.native="logoutOtherBrowserSessions" />
 
-                        <jet-input-error :message="form.error('password')" class="mt-2" />
+                        <jet-input-error :message="form.errors.password" class="mt-2" />
                     </div>
                 </template>
 
                 <template #footer>
-                    <jet-secondary-button @click.native="confirmingLogout = false">
+                    <jet-secondary-button @click.native="closeModal">
                         Nevermind
                     </jet-secondary-button>
 
@@ -87,13 +87,13 @@
 </template>
 
 <script>
-    import JetActionMessage from './../../Jetstream/ActionMessage'
-    import JetActionSection from './../../Jetstream/ActionSection'
-    import JetButton from './../../Jetstream/Button'
-    import JetDialogModal from './../../Jetstream/DialogModal'
-    import JetInput from './../../Jetstream/Input'
-    import JetInputError from './../../Jetstream/InputError'
-    import JetSecondaryButton from './../../Jetstream/SecondaryButton'
+    import JetActionMessage from '@/Jetstream/ActionMessage'
+    import JetActionSection from '@/Jetstream/ActionSection'
+    import JetButton from '@/Jetstream/Button'
+    import JetDialogModal from '@/Jetstream/DialogModal'
+    import JetInput from '@/Jetstream/Input'
+    import JetInputError from '@/Jetstream/InputError'
+    import JetSecondaryButton from '@/Jetstream/SecondaryButton'
 
     export default {
         props: ['sessions'],
@@ -113,33 +113,31 @@
                 confirmingLogout: false,
 
                 form: this.$inertia.form({
-                    '_method': 'DELETE',
                     password: '',
-                }, {
-                    bag: 'logoutOtherBrowserSessions'
                 })
             }
         },
 
         methods: {
             confirmLogout() {
-                this.form.password = ''
-
                 this.confirmingLogout = true
 
-                setTimeout(() => {
-                    this.$refs.password.focus()
-                }, 250)
+                setTimeout(() => this.$refs.password.focus(), 250)
             },
 
             logoutOtherBrowserSessions() {
-                this.form.post('/user/other-browser-sessions', {
-                    preserveScroll: true
-                }).then(response => {
-                    if (! this.form.hasErrors()) {
-                        this.confirmingLogout = false
-                    }
+                this.form.delete(route('other-browser-sessions.destroy'), {
+                    preserveScroll: true,
+                    onSuccess: () => this.closeModal(),
+                    onError: () => this.$refs.password.focus(),
+                    onFinish: () => this.form.reset(),
                 })
+            },
+
+            closeModal() {
+                this.confirmingLogout = false
+
+                this.form.reset()
             },
         },
     }
