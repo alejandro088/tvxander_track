@@ -121,6 +121,8 @@ return [
 
     'key' => env('APP_KEY'),
 
+    'tmdb_key' => env('TMDB_APP_KEY'),
+
     'cipher' => 'AES-256-CBC',
 
     /*
