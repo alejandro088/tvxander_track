@@ -1,6 +1,6 @@
 <template>
   <!--signup form popup-->
-<div class="login-wrapper"  id="signup-content">
+<div class="login-wrapper"  id="signup-content" v-if="visible">
     <div class="login-content">
         <a href="#" class="close">x</a>
         <h3>sign up</h3>
@@ -41,7 +41,12 @@
 
 <script>
 export default {
-
+    data() {
+    return {
+        visible: false,
+        csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    }
+    }
 }
 </script>
 
