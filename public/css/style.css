@@ -5850,6 +5850,7 @@ ul {
 .page-single {
   background-color: #020d18;
   padding: 75px 0;
+  padding-top: 600px;
 }
 .social-btn {
   margin-bottom: 40px;
@@ -6915,7 +6916,6 @@ p.ceb-single {
   font-size: 36px;
   color: #222222;
   font-weight: 700;
-  text-transform: uppercase;
   margin-bottom: 45px;
   text-align: center;
 }
@@ -6959,7 +6959,6 @@ p.ceb-single {
   font-size: 14px;
   color: #222222;
   font-weight: bold;
-  text-transform: uppercase;
   width: 100%;
   margin-bottom: 25px;
 }
@@ -6973,7 +6972,6 @@ p.ceb-single {
   font-size: 14px;
   color: #222222;
   font-weight: bold;
-  text-transform: capitalize;
   margin-top: 10px;
   height: 42px;
   border: 1px solid #e1e1e1;
@@ -8054,9 +8052,6 @@ header#headerv3-light {
   -moz-transition: all 0.5s ease-out;
   -o-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
-}
-.sticky .top-search {
-  display: none;
 }
 @media (max-width: 991px) {
   .top-search select {
