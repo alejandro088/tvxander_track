@@ -3596,9 +3596,7 @@
     /* Still needed for Firefox 28; see http://caniuse.com/#search=box-sizing */
     box-sizing: border-box;
   }
-  body {
-    overflow-x: hidden;
-  }
+
   article,
   aside,
   details,
@@ -4155,7 +4153,7 @@
     background-color: #dd003f;
     padding: 8px 15px;
     width: 110px;
-    height: 38px;
+    height: 20px;
     text-align: center;
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
@@ -6678,9 +6676,7 @@
   p.ceb-single {
     font-size: 18px;
   }
-  .cebleb-single {
-    margin-top: -345px;
-  }
+
   @media (max-width: 767px) {
     .cebleb-single {
       overflow: hidden;
@@ -7888,9 +7884,7 @@
   }
   .sticky {
     background-color: #0f2133;
-    position: fixed;
     width: 100%;
-    z-index: 9999;
     -moz-opacity: 1;
     -khtml-opacity: 1;
     -webkit-opacity: 1;
