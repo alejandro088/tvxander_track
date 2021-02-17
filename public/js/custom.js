@@ -49,8 +49,7 @@ $(function(){
 	});
 	//js for tabs
 	var tabsClick = $('.tabs .tab-links a, .tab-links-2 a, .tab-links-3 a');
-	var multiItem = $('.slick-multiItem');
-	var multiItem2 = $('.slick-multiItem2');
+	
 	tabsClick.on('click', function(e)  {
 		var currentAttrValue = $(this).attr('href');
 		var tabsCurrent = $('.tabs ' + currentAttrValue);
@@ -60,8 +59,6 @@ $(function(){
 		$(this).parent('li').addClass('active').siblings().removeClass('active');
 		e.preventDefault();
 		//reset position for tabs
-		multiItem.slick('setPosition');
-		multiItem2.slick('setPosition');
 	});
 	// js for time count down
 	function getTimeRemaining(endtime) {
@@ -104,91 +101,7 @@ $(function(){
 	var deadline = new Date(Date.parse(new Date()) + 25 * 24 * 60 * 60 * 1000);
 	initializeClock('clockdiv', deadline);
 
-	//js for twitter
-	var tweets = jQuery(".tweet");
-	jQuery(tweets).each( function( t, tweet ) { 
-    var id = jQuery(this).attr('id');
-    twttr.widgets.createTweet(
-      id, tweet, 
-      {
-        conversation : 'none',    // or all
-        cards        : 'hidden',  // or visible 
-        linkColor    : 'default', // default is blue
-        theme        : 'light'    // or dark
-      });
-    }); 
-
-	//slider for movie and tv show home 2
-	multiItem2.slick({
-		infinite: true,
-		slidesToShow: 6,
-		slidesToScroll: 6,
-		arrows: false,
-		// autoplay: true ,
-		// autoplaySpeed: 2000,
-		dots: true,
-		responsive: [
-	    {
-	      breakpoint: 1200,
-	      settings: {
-	        slidesToShow: 3,
-	        slidesToScroll: 3,
-	        infinite: true,
-	        dots: true
-	      }
-	    },
-	    {
-	      breakpoint: 768,
-	      settings: {
-	        slidesToShow: 3,
-	        slidesToScroll: 3
-	      }
-	    },
-	    {
-	      breakpoint: 480,
-	      settings: {
-	        slidesToShow: 1,
-	        slidesToScroll: 1
-	      }
-	    }
-	  ]
-	});
-	//slider movie and tv show home 1, 3
-	multiItem.slick({
-		infinite: true,
-		slidesToShow: 4,
-		slidesToScroll: 4,
-		arrows: false,
-		draggable:true,
-		// autoplay: true,
-		// autoplaySpeed: 2000,
-		dots: true,
-		responsive: [
-	    {
-	      breakpoint: 1024,
-	      settings: {
-	        slidesToShow: 3,
-	        slidesToScroll: 3,
-	        infinite: true,
-	        dots: true
-	      }
-	    },
-	    {
-	      breakpoint: 768,
-	      settings: {
-	        slidesToShow: 2,
-	        slidesToScroll: 2
-	      }
-	    },
-	    {
-	      breakpoint: 480,
-	      settings: {
-	        slidesToShow: 1,
-	        slidesToScroll: 1
-	      }
-	    }
-	  ]
-	});
+	
 	//main slider home 1
 	var multiItemSlider = $('.slick-multiItemSlider');
 	multiItemSlider.slick({
@@ -372,36 +285,8 @@ $(function(){
 		// autoplay: true,
 		// autoplaySpeed: 2000
 	});
-	//== js for video lightbox
-	var fancyboxmedia = $('.fancybox-media');
-	fancyboxmedia.fancybox({
-		openEffect  : 'float',
-		closeEffect : 'none',
-		helpers : {
-			media : {},
-			overlay: {
-		        locked: false
-		    }
-		}
-	});	
-	//==js for show prev/next button in video lightbox
-	fancyboxmedia
-	    .attr('rel', 'playlist')
-	    .fancybox({
-	    openEffect: 'none',
-	    closeEffect: 'none',
-	    prevEffect: 'none',
-	    nextEffect: 'none',
-	    helpers: {
-	        media: {}
-	    },
-	    youtube: {
-	        autoplay: 1,
-	        hd: 1,
-	        wmode: 'opaque', // shows X to close
-	        vq: 'hd720' // default 720p hd quality
-	    }
-	});
+	
+	
 	//== js for image lightbox
 	var imglightbox = $(".img-lightbox");
 	imglightbox.fancybox({
@@ -441,55 +326,8 @@ $(function(){
             lightboxprev.attr("title", prev);
         }
     });
-	//==js for login and sign up
-	var loginLink = $(".loginLink");
-	var signupLink = $(".signupLink");
-	var loginct = $( "#login-content" );
-	var signupct= $("#signup-content");
-	var loginWrap = $(".login-wrapper");
-	var overlay = $(".overlay");
-	loginWrap.each( function(){
-		$(this).wrap('<div class="overlay"></div>')
-	});
-	//pop up for login form
-    loginLink.on('click', function(event){
-    	event.preventDefault();
-    	loginct.parents(overlay).addClass("openform");
-		$(document).on('click', function(e){
-		var target = $(e.target);
-		if ($(target).hasClass("overlay")){
-				$(target).find(loginct).each( function(){
-					$(this).removeClass("openform");
-				});
-				setTimeout( function(){
-					$(target).removeClass("openform");
-				}, 350);
-			}	
-		});
-    });
-    //pop up for signup form
-    signupLink.on('click', function(event){
-    	event.preventDefault();
-    	signupct.parents(overlay).addClass("openform");
-		$(document).on('click', function(e){
-		var target = $(e.target);
-		if ($(target).hasClass("overlay")){
-				$(target).find(signupct).each( function(){
-					$(this).removeClass("openform");
-				});
-				setTimeout( function(){
-					$(target).removeClass("openform");
-				}, 350);
-			}	
-		});
-    });
-    // close popup for mobile
-    var closebt = $(".close");
-   	closebt.on('click', function(e){
-		e.preventDefault();
-		var overlay = $(".overlay");
-		overlay.removeClass("openform");
-	});	
+	
+    
     //js for multi selected
     var multiselect = $(".ui.fluid.dropdown");
     multiselect.dropdown({
@@ -497,17 +335,7 @@ $(function(){
 	})
 	multiselect.dropdown({'set selected': 'Role1,Role2'});
 	//== scroll function for single page
-	$(window).scroll(function(event) {
-		/* Act on the event */
-		var scrollPos = $(window).scrollTop(),
-		header = $('header');
-		//sticky for menu
-		if(scrollPos > 300){
-			header.addClass('sticky');
-		}else{
-			header.removeClass('sticky');
-		}
-	});		
+	
 	//back to top js
 	var backtotop = $('#back-to-top');
     backtotop.on('click', function (e) {
