@@ -1,20 +1,16 @@
 <template>
-  <!--preloading-->
+    <!--preloading-->
     <div id="preloader">
         <div id="status">
             <span></span>
             <span></span>
         </div>
     </div>
-<!--end of preloading-->
+    <!--end of preloading-->
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>
