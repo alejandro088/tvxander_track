@@ -7,7 +7,7 @@
                     v-for="season in $page.props.tv.seasons"
                     :key="season.id"
                 >
-                    <div >
+                    <div>
                         <div class="cast-left series-it">
                             <v-col md="4">
                                 <img
@@ -22,9 +22,7 @@
                                     <a href="#">{{ season.name }}</a>
                                     <p>Espisodes: {{ season.episode_count }}</p>
                                     <p>
-                                        {{
-                                            season.overview.substring(0, 300)
-                                        }}
+                                        {{ season.overview.substring(0, 300) }}
                                         ...
                                     </p>
                                 </div>

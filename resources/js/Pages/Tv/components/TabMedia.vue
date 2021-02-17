@@ -4,47 +4,50 @@
             <div class="rv-hd">
                 <div>
                     <h3>Videos & Photos of</h3>
-                    <h2>{{ $page["props"]["tv"].name }}</h2>
+                    <h2>{{ $page.props.tv.name }}</h2>
                 </div>
             </div>
             <div class="col-12 title-hd-sm">
-                <h4>Videos <span>(8)</span></h4>
+                <h4>
+                    Videos
+                    <span>({{ $page.props.videos.results.length }})</span>
+                </h4>
             </div>
-            <div class="mvsingle-item media-item">
-                <div
-                    class="vd-item"
-                    v-for="video in $page['props']['videos'].results"
+
+            <v-row class="mvsingle-item media-item">
+                <v-col
+                    v-for="video in $page.props.videos.results"
                     :key="video.key"
+                    class="d-flex child-flex vd-item"
+                    cols="4"
                 >
                     <div class="vd-it">
                         <img
                             class="vd-img"
-                            width="170px"
-                            height="96px"
                             :src="
                                 `https://i.ytimg.com/vi/${video.key}/hqdefault.jpg`
                             "
                             alt=""
                         />
-                        <a
-                            class="fancybox-media hvr-grow"
-                            :href="`https://www.youtube.com/embed/${video.key}`"
-                            ><img src="/images/uploads/play-vd.png" alt=""
-                        /></a>
+
+                        <a @click="showVideoModal(video)">
+                            <img src="/images/uploads/play-vd.png" alt="" />
+                        </a>
                     </div>
                     <div class="vd-infor">
                         <h6>
                             <a href="#">{{ video.name }}</a>
                         </h6>
                     </div>
-                </div>
-            </div>
+                </v-col>
+            </v-row>
+
             <div class="col-12 title-hd-sm">
-                <h4>Photos <span> (21)</span></h4>
+                <h4>Photos <span> ({{ $page.props.images.backdrops + $page.props.images.posters}})</span></h4>
             </div>
             <div class="mvsingle-item">
                 <a
-                    v-for="image in $page['props']['images'].backdrops"
+                    v-for="image in $page.props.images.backdrops"
                     :key="image.index"
                     class="img-lightbox"
                     data-fancybox-group="gallery"
@@ -58,7 +61,7 @@
                         alt=""
                 /></a>
                 <a
-                    v-for="image in $page['props']['images'].posters"
+                    v-for="image in $page.props.images.posters"
                     :key="image.index"
                     class="img-lightbox"
                     data-fancybox-group="gallery"
@@ -77,7 +80,28 @@
 </template>
 
 <script>
-export default {};
+import TvxanderVideoModal from "@/Tvxander/TvxanderVideoModal";
+
+export default {
+    components: {
+        TvxanderVideoModal
+    },
+    data() {
+        return {
+            videoModal: false,
+            ytvideo: ""
+        };
+    },
+    methods: {
+        showVideoModal(video) {
+            this.ytvideo = video;
+            this.videoModal = true;
+
+            this.$store.state.videoModal = true;
+            this.$store.state.ytvideo = video;
+        }
+    }
+};
 </script>
 
 <style></style>
