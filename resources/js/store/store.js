@@ -1,81 +1,90 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        
-            loading: false,
-            serie: null,
-            seasons: null,
-        
+        loading: false,
+        serie: null,
+        seasons: null,
+        dirImagesTmdb: { 
+            w500: "https://image.tmdb.org/t/p/w500",
+            w300: "https://image.tmdb.org/t/p/w300",
+            w200: "https://image.tmdb.org/t/p/w200",
+            h50: "https://image.tmdb.org/t/p/h50",
+        },
+        videoModal: false,
+        ytvideo: {},
+        player: {}
     },
     mutations: {
-      resetData (state) {
-        //state.count++
-        state.serie = null;
-        state.seasons = null;
-        state.loading = true;
-      },
-      load (state, ok) {
-        state.loading = ok;
-      },
-      loadSeasons (state, seasons) {
-        state.seasons = seasons;
-      },
-      loadSeries (state, series) {
-        state.serie = series;
-      },
+        resetData(state) {
+            //state.count++
+            state.serie = null;
+            state.seasons = null;
+            state.loading = true;
+        },
+        load(state, ok) {
+            state.loading = ok;
+        },
+        loadSeasons(state, seasons) {
+            state.seasons = seasons;
+        },
+        loadSeries(state, series) {
+            state.serie = series;
+        }
     },
     actions: {
-        setWatched (context, args) {
-
+        setWatched(context, args) {
             this.isWaiting = true;
 
-            const data = axios.post(`/dashboard/episode/${args.episode.id}/watched`, {
-                check: args.checked
-            }, {
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            }).then(response => {
-
-                this.isWaiting = false;
-                this.isComplete = true;
-            }, response => {
-                // error callback
-                this.hasError = true;
-
-            });
-
+            const data = axios
+                .post(
+                    `/dashboard/episode/${args.episode.id}/watched`,
+                    {
+                        check: args.checked
+                    },
+                    {
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            )
+                        }
+                    }
+                )
+                .then(
+                    response => {
+                        this.isWaiting = false;
+                        this.isComplete = true;
+                    },
+                    response => {
+                        // error callback
+                        this.hasError = true;
+                    }
+                );
         },
-        episodes (context, id) {
+        episodes(context, id) {
             //console.log(id);
 
-            context.commit('resetData');
-            
+            context.commit("resetData");
 
-            const data = axios.get(`/dashboard/shows/${id}`)
+            const data = axios
+                .get(`/dashboard/shows/${id}`)
                 .then(response => {
-                    
                     var seasons = Object.assign({}, response.data.seasons);
-                    
-                    
-                    context.commit('loadSeries', response.data.show);
-                    context.commit('loadSeasons', seasons);
-                    context.commit('load', true);
+
+                    context.commit("loadSeries", response.data.show);
+                    context.commit("loadSeasons", seasons);
+                    context.commit("load", true);
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 })
-                .then(function () {
-                    context.commit('load', false);
+                .then(function() {
+                    context.commit("load", false);
                 });
-
-
-
-        },
-    },
-  });
+        }
+    }
+});
