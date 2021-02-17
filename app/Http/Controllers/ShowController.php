@@ -55,7 +55,7 @@ class ShowController extends Controller
 
         $s = $this->client->getTvApi()->getSimilar($tv);
 
-        $isMyShow = auth()->user()->shows->where('show', $tv)->first() ? true : false;
+        $isMyShow = (auth()->user() && auth()->user()->shows->where('show', $tv)->first()) ? true : false;
 
         $crew = collect($c['crew']);
 
@@ -198,8 +198,8 @@ class ShowController extends Controller
                 
                 $events[] = [ 
                     'title' => "$name {$episode->season_number}x{$episode->episode_number}",
-                    'start' => $episode->air_date,
-                    'url' => "/tv/show/$episode->show_id",
+                    'date' => $episode->air_date,
+                    'url' => "/tv/$episode->show_id",
                     'description' => $episode->overview,
                  ];
             }
