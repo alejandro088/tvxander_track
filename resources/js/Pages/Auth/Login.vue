@@ -103,7 +103,7 @@ export default {
                     ...data,
                     remember: this.form.remember ? "on" : ""
                 }))
-                .post(this.route("login"), {
+                .post('/login', {
                     onFinish: () => this.form.reset("password")
                 });
         }
