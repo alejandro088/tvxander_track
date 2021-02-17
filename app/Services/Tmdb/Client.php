@@ -12,6 +12,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Tmdb\Event\Listener\Request\ApiTokenRequestListener;
 use Tmdb\Event\Listener\Request\UserAgentRequestListener;
 use Tmdb\Event\Listener\Request\AcceptJsonRequestListener;
+use Tmdb\Event\Listener\Request\LanguageFilterRequestListener;
 use Tmdb\Event\Listener\Request\ContentTypeJsonRequestListener;
 
 class Client{
@@ -44,6 +45,10 @@ class Client{
         /**
          * Required event listeners and events to be registered with the PSR-14 Event Dispatcher.
          */
+
+        /*$languageFilterListener = new LanguageFilterRequestListener('en-EN');
+        $ed->addListener(BeforeRequestEvent::class, $languageFilterListener);*/
+
         $requestListener = new RequestListener($client->getHttpClient(), $ed);
         $ed->addListener(RequestEvent::class, $requestListener);
 
