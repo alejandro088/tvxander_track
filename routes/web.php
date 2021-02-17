@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\EpisodeController;
 
@@ -29,15 +30,19 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-Route::get('/movies/show/{movie}', [MovieController::class, 'show'])->name('movie.show');
+Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movie.show');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/search/grid', [SearchController::class, 'grid'])->name('search.grid');
 
-Route::get('/tv/show/{tv}', [ShowController::class, 'show'])->name('tv.show');
+Route::get('/tv/{tv}', [ShowController::class, 'show'])->name('tv.show');
+
+Route::get('/person/{person}', [PersonController::class, 'show'])->name('person.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/tv/{show}/add', [ShowController::class, 'store'])->name('tv.store');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/tv/{show}/update', [ShowController::class, 'store'])->name('tv.update');
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/tv/{show}/archive',  [ShowController::class, 'archive'])->name('tv.archive');
 
