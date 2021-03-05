@@ -1,18 +1,17 @@
 <template>
     <div>
         <v-container fluid>
-            <md-switch
+            <v-switch
                 v-model="isWatched"
                 @change="setWatchedSeason(season, $event)"
-            >
-                <span>Marcar temporada como vista?</span>
-            </md-switch>
+                hide-details
+                label="Marcar temporada como vista?"
+            ></v-switch>
         </v-container>
     </div>
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
     props: ["season"],
@@ -25,7 +24,7 @@ export default {
     methods: {
         setWatchedSeason: async function(season, e) {
             console.log(this.isWatched);
-            const data = await axios
+            await window.axios
                 .post(
                     `/dashboard/season/${season["id"]}/watched`,
                     {
@@ -41,15 +40,11 @@ export default {
                 )
                 .then(
                     response => {
-                        e.target.classList.add("primary");
-                        e.target.classList.remove("success");
-                        e.target.classList.remove("danger");
+                        console.log('All episodes have been successfully marked!');
                     },
                     response => {
                         // error callback
-                        e.target.classList.add("danger");
-
-                        e.target.classList.remove("success");
+                        console.log('An error has occurred');
                     }
                 );
         }

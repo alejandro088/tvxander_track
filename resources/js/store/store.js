@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -9,15 +8,66 @@ export const store = new Vuex.Store({
         loading: false,
         serie: null,
         seasons: null,
-        dirImagesTmdb: { 
-            w500: "https://image.tmdb.org/t/p/w500",
-            w300: "https://image.tmdb.org/t/p/w300",
-            w200: "https://image.tmdb.org/t/p/w200",
-            h50: "https://image.tmdb.org/t/p/h50",
+        dirImagesTmdb: {
+            base_url: "http://image.tmdb.org/t/p/",
+            secure_base_url: "https://image.tmdb.org/t/p/",
+            backdrop_sizes: ["w300", "w780", "w1280", "original"],
+            logo_sizes: [
+                "w45",
+                "w92",
+                "w154",
+                "w185",
+                "w300",
+                "w500",
+                "original"
+            ],
+            poster_sizes: [
+                "w92",
+                "w154",
+                "w185",
+                "w342",
+                "w500",
+                "w780",
+                "original"
+            ],
+            profile_sizes: ["w45", "w185", "h632", "original"],
+            still_sizes: ["w92", "w185", "w300", "original"]
         },
         videoModal: false,
         ytvideo: {},
         player: {}
+    },
+    getters: {
+        backdrop_size_original: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.backdrop_sizes[3];
+        },
+        backdrop_size_w300: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.backdrop_sizes[0];
+        },
+        poster_size_original: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.poster_sizes[6];
+        },
+        poster_size_w92: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.poster_sizes[0];
+        },
+        poster_size_w154: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.poster_sizes[1];
+        },
+        profile_size_original: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.profile_sizes[3];
+        },
+        profile_size_w185: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.profile_sizes[1];
+        },
+        profile_size_w45: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.profile_sizes[0];
+        },
+        logo_size_original: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.logo_sizes[3];
+        },
+        logo_size_w185: state => {
+            return  state.dirImagesTmdb.secure_base_url + state.dirImagesTmdb.logo_sizes[3];
+        }
     },
     mutations: {
         resetData(state) {
@@ -37,40 +87,12 @@ export const store = new Vuex.Store({
         }
     },
     actions: {
-        setWatched(context, args) {
-            this.isWaiting = true;
-
-            const data = axios
-                .post(
-                    `/dashboard/episode/${args.episode.id}/watched`,
-                    {
-                        check: args.checked
-                    },
-                    {
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            )
-                        }
-                    }
-                )
-                .then(
-                    response => {
-                        this.isWaiting = false;
-                        this.isComplete = true;
-                    },
-                    response => {
-                        // error callback
-                        this.hasError = true;
-                    }
-                );
-        },
         episodes(context, id) {
             //console.log(id);
 
             context.commit("resetData");
 
-            const data = axios
+            window.axios
                 .get(`/dashboard/shows/${id}`)
                 .then(response => {
                     var seasons = Object.assign({}, response.data.seasons);

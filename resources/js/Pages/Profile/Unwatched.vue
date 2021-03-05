@@ -65,13 +65,10 @@
                                 <div class="row mt-3" v-if="$store.state.serie">
                                     <div class="container">
                                         <p>
-                                            <button
-                                                class="btn btn-danger"
-                                                @click="update"
-                                            >
+                                            <v-btn @click="update" depressed color="error" dark>
                                                 Refresh data for
                                                 {{ $store.state.serie.name }}
-                                            </button>
+                                            </v-btn>
                                         </p>
                                         <p>
                                             <span class="text-muted"
@@ -114,17 +111,15 @@ export default {
     data() {
         return {
             tabs: null,
-            loading: false
+            loading: false,
         };
+    },
+    mounted(){
+        
     },
     methods: {
         toJson(json) {
             return JSON.parse(json);
-        },
-        humanize(date) {
-            return DateTime.fromISO(date)
-                .setLocale("es")
-                .toRelative();
         },
         async showDelete(id) {
             try {
@@ -141,7 +136,7 @@ export default {
 
             _evt.target.disabled = true;
 
-            const data = await axios
+            await window.axios
                 .post(`/tv/${serie.show}/update`)
                 .then(response => {
                     this.$store.serie = response.data.show;
@@ -154,5 +149,3 @@ export default {
     }
 };
 </script>
-
-<style></style>

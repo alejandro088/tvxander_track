@@ -27,7 +27,7 @@
                 :key="related.index"
             >
                 <img
-                    :src="$store.state.dirImagesTmdb.w300 + related.poster_path"
+                    :src="$store.getters.poster_size_w154 + related.poster_path"
                     alt=""
                 />
                 <div class="mv-item-infor">

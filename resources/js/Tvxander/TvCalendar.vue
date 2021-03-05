@@ -29,7 +29,7 @@ export default {
         };
     },
     created() {
-        const data = axios.get(`/events`).then(response => {
+        axios.get(`/events`).then(response => {
             this.calendarOptions.events = response.data;
         });
     }
@@ -37,7 +37,10 @@ export default {
 </script>
 
 <style>
+
+
 .fc-event-title {
     color: black;
 }
+
 </style>

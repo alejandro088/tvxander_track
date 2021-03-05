@@ -16,6 +16,11 @@ export default {
     props: ["episodes"],
     components: {
         TvEpisode
+    },
+    methods: {
+        notification(data) {
+            this.$emit('notification', data);
+        }
     }
 };
 </script>

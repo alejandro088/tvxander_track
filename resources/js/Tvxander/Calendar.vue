@@ -22,7 +22,7 @@ export default {
         };
     },
     created() {
-        const data = axios.get(`/events`).then(response => {
+        axios.get(`/events`).then(response => {
             this.events = response.data;
         });
     },

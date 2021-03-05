@@ -7,7 +7,7 @@ module.exports = {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.vue',
     ],
-
+    prefix: 'tw-',
     theme: {
         extend: {
             fontFamily: {

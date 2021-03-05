@@ -1,72 +1,73 @@
 <template>
-    <nav id="mainNav" class="navbar navbar-default navbar-custom">
-        <!-- Brand and toggle get grouped for better mobile display -->
-
-        <jet-dialog-modal :show="loginModal" @close="loginModal = false">
-            <template #content>
+    <nav>
+        <v-dialog v-model="loginModal" max-width="400">
+            <v-card class="m-4">
                 <app-login />
-            </template>
-        </jet-dialog-modal>
+            </v-card>
+        </v-dialog>
 
-        <jet-dialog-modal :show="registerModal" @close="registerModal = false">
-            <template #content>
+
+        <v-dialog v-model="registerModal" max-width="400">
+            <v-card>
                 <app-register />
-            </template>
-        </jet-dialog-modal>
+            </v-card>
+        </v-dialog>
 
-        <div class="navbar-header logo">
-            <div
-                class="navbar-toggle"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1"
-            >
-                <span class="sr-only">Toggle navigation</span>
-                <div id="nav-icon1">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+        <v-toolbar dark>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
+            <v-toolbar-title class="mx-3">
+                <div class="logo">
+                    <a :href="route('home')">
+                        <h2>TVXander</h2>
+                    </a>
+                </div>
+            </v-toolbar-title>
+
+            <template v-if="$page.props.user">
+                <div class="mx-2">
+                    <inertia-link as="v-btn" href="/dashboard" text>
+                        Dashboard
+                    </inertia-link>
+
+                    <v-btn @click="logout" color="error">
+                        Logout
+                    </v-btn>
+                </div>
+            </template>
+
+            <template v-else>
+                <v-btn @click="loginModal = true" text>Log In</v-btn>
+
+                <v-btn @click="registerModal = true" color="red" rounded>Sign Up</v-btn>
+            </template>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="toggleSearchDialog">
+                <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>mdi-heart</v-icon>
+            </v-btn>
+            <v-btn icon>
+                <v-icon>mdi-dots-vertical</v-icon>
+            </v-btn>
+
+            <!--Search-->
+            <div class="search-sticky" id="search-content" v-if="showSearch" v-click-outside="onClickOutside">
+                <div>
+                    <v-text-field
+                        v-model="query"
+                        outlined
+                        clearable
+                        label="Search for a movie, TV Show or celebrity that you are looking for"
+                        type="text"
+                        @keyup.enter.prevent="search"
+                        light
+                        autofocus
+                        id="searchfield"
+                    />
                 </div>
             </div>
-            <a :href="route('home')">
-                <h2>TVXander</h2>
-            </a>
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div
-            class="collapse navbar-collapse flex-parent"
-            id="bs-example-navbar-collapse-1"
-        >
-            <ul class="nav navbar-nav flex-child-menu menu-left">
-                <li class="hidden">
-                    <a href="#page-top"></a>
-                </li>
-
-                <template v-if="$page.props.user">
-                    <li>
-                        <inertia-link href="/dashboard">
-                            Dashboard
-                        </inertia-link>
-                    </li>
-                    <!-- Authentication -->
-                    <form @submit.prevent="logout">
-                        <button
-                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                        >
-                            Logout
-                        </button>
-                    </form>
-                </template>
-                <template v-else>
-                    <li class="loginLink">
-                        <a href="#" @click="loginModal = true">LOG In</a>
-                    </li>
-                    <li class="btn signupLink">
-                        <a href="#" @click="registerModal = true">sign up</a>
-                    </li>
-                </template>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+        </v-toolbar>
     </nav>
 </template>
 
@@ -88,15 +89,38 @@ export default {
     data() {
         return {
             loginModal: false,
-            registerModal: false
+            registerModal: false,
+            query: "",
+            showSearch: false
         };
     },
+    mounted() {},
     methods: {
+        onClickOutside(){
+            this.showSearch = false;
+        },
         logout() {
             this.$inertia.post(route("logout"));
+        },
+        search() {
+            this.$inertia.get("/search", { query: this.query });
+        },
+
+        toggleSearchDialog() {
+            this.showSearch = !this.showSearch;
         }
     }
 };
 </script>
 
-<style></style>
+<style>
+.search-sticky {
+    background-color: white;
+    padding: 10px;
+    position: fixed;
+    top: 100px;
+    width: 95vw;
+    height: 100px;
+    margin-top: 100px;
+}
+</style>

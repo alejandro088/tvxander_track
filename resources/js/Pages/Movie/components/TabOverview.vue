@@ -1,214 +1,224 @@
 <template>
     <div id="overview" class="tab active">
         <v-container>
-            <div class="col-md-8 col-sm-12 col-xs-12">
-                <p>{{ $page.props.movie.overview }}</p>
+            <v-row>
+                <v-col cols="12" sm="12" md="8">
+                    <p>{{ $page.props.movie.overview }}</p>
 
-                <div class="title-hd-sm">
-                    <h4>Videos & Photos</h4>
-                    <a href="#" class="time"
-                        >All {{ $page.props.videos.results.length }} Videos &
-                        {{
-                            $page.props.images.backdrops.length +
-                                $page.props.images.posters.length
-                        }}
-                        Photos <i class="ion-ios-arrow-right"></i
-                    ></a>
-                </div>
-                <div class="mvsingle-item ov-item">
-                    <v-row>
-                        <v-col
-                            v-for="image in $page.props.images.backdrops"
-                            :key="image.file_path"
-                            class="d-flex child-flex"
-                            cols="4"
-                        >
-                            <a
-                                class="img-lightbox"
-                                data-fancybox-group="gallery"
-                                :href="
-                                    $store.state.dirImagesTmdb.w500 +
-                                        image.file_path
-                                "
-                                ><v-img
-                                    :src="
-                                        $store.state.dirImagesTmdb.w200 +
+                    <div class="title-hd-sm">
+                        <h4>Videos & Photos</h4>
+                        <a href="#" class="time"
+                            >All {{ $page.props.videos.results.length }} Videos
+                            &
+                            {{
+                                $page.props.movie.images.backdrops.length +
+                                    $page.props.movie.images.posters.length
+                            }}
+                            Photos <i class="ion-ios-arrow-right"></i
+                        ></a>
+                    </div>
+                    <div class="mvsingle-item ov-item">
+                        <v-row>
+                            <v-col
+                                v-for="image in $page.props.movie.images
+                                    .backdrops"
+                                :key="image.file_path"
+                                class="d-flex child-flex"
+                                cols="4"
+                            >
+                                <a
+                                    class="img-lightbox"
+                                    data-fancybox-group="gallery"
+                                    :href="
+                                        $store.getters.backdrop_size_original +
                                             image.file_path
                                     "
-                                    alt=""
-                                    aspect-ratio="1"
-                                    class="grey lighten-2"
-                                >
-                                    <template v-slot:placeholder>
-                                        <v-row
-                                            class="fill-height ma-0"
-                                            align="center"
-                                            justify="center"
-                                        >
-                                            <v-progress-circular
-                                                indeterminate
-                                                color="grey lighten-5"
-                                            ></v-progress-circular>
-                                        </v-row>
-                                    </template>
-                                </v-img>
-                            </a>
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col
-                            v-for="image in $page.props.images.posters"
-                            :key="image.file_path"
-                            class="d-flex child-flex"
-                            cols="4"
-                        >
-                            <a
-                                class="img-lightbox"
-                                data-fancybox-group="gallery"
-                                :href="
-                                    $store.state.dirImagesTmdb.w500 +
-                                        image.file_path
-                                "
-                                ><v-img
-                                    :src="
-                                        `https://www.themoviedb.org/t/p/w100_and_h100_bestv2${image.file_path}`
+                                    ><v-img
+                                        :src="
+                                            $store.getters.backdrop_size_w300 +
+                                                image.file_path
+                                        "
+                                        alt=""
+                                        aspect-ratio="1"
+                                        class="grey lighten-2"
+                                    >
+                                        <template v-slot:placeholder>
+                                            <v-row
+                                                class="fill-height ma-0"
+                                                align="center"
+                                                justify="center"
+                                            >
+                                                <v-progress-circular
+                                                    indeterminate
+                                                    color="grey lighten-5"
+                                                ></v-progress-circular>
+                                            </v-row>
+                                        </template>
+                                    </v-img>
+                                </a>
+                            </v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col
+                                v-for="image in $page.props.movie.images
+                                    .posters"
+                                :key="image.file_path"
+                                class="d-flex child-flex"
+                                cols="4"
+                            >
+                                <a
+                                    class="img-lightbox"
+                                    data-fancybox-group="gallery"
+                                    :href="
+                                        $store.getters.poster_size_original +
+                                            image.file_path
                                     "
-                                    alt=""
-                                >
-                                    <template v-slot:placeholder>
-                                        <v-row
-                                            class="fill-height ma-0"
-                                            align="center"
-                                            justify="center"
-                                        >
-                                            <v-progress-circular
-                                                indeterminate
-                                                color="grey lighten-5"
-                                            ></v-progress-circular>
-                                        </v-row>
-                                    </template>
-                                </v-img>
-                            </a> </v-col
-                    ></v-row>
+                                    ><v-img
+                                        :src="
+                                            $store.getters.poster_size_w154 +
+                                                image.file_path
+                                        "
+                                        alt=""
+                                    >
+                                        <template v-slot:placeholder>
+                                            <v-row
+                                                class="fill-height ma-0"
+                                                align="center"
+                                                justify="center"
+                                            >
+                                                <v-progress-circular
+                                                    indeterminate
+                                                    color="grey lighten-5"
+                                                ></v-progress-circular>
+                                            </v-row>
+                                        </template>
+                                    </v-img>
+                                </a> </v-col
+                        ></v-row>
 
-                    <v-divider />
+                        <v-divider />
 
-                    <v-row>
-                        <v-col
-                            v-for="video in $page.props.videos.results"
-                            :key="video.key"
-                            class="d-flex child-flex"
-                            cols="4"
-                        >
-                            <div class="vd-it">
-                                <img
-                                    class="vd-img"
-                                    :src="
-                                        `https://i.ytimg.com/vi/${video.key}/hqdefault.jpg`
-                                    "
-                                    alt=""
-                                />
-
-                                <a @click="showVideoModal(video)">
+                        <v-row>
+                            <v-col
+                                v-for="video in $page.props.videos.results"
+                                :key="video.key"
+                                class="d-flex child-flex"
+                                cols="4"
+                            >
+                                <div class="vd-it">
                                     <img
-                                        src="/images/uploads/play-vd.png"
+                                        class="vd-img"
+                                        :src="
+                                            `https://i.ytimg.com/vi/${video.key}/hqdefault.jpg`
+                                        "
                                         alt=""
                                     />
-                                </a>
-                            </div>
-                        </v-col>
-                    </v-row>
-                </div>
-                <div class="title-hd-sm">
-                    <h4>cast</h4>
-                    <a href="#" class="time"
-                        >Full Cast & Crew <i class="ion-ios-arrow-right"></i
-                    ></a>
-                </div>
-                <!-- movie cast -->
-                <div class="mvcast-item">
-                    <v-virtual-scroll
-                        :items="$page.props.cast"
-                        :item-height="50"
-                        height="300"
-                    >
-                        <template v-slot:default="{ item }">
-                            <v-list-item>
-                                <v-list-item-avatar>
-                                    <v-avatar size="56" class="profile">
-                                        <v-img
-                                            class="mx-3"
-                                            :src="
-                                                item.profile_path
-                                                    ? $store.state.dirImagesTmdb
-                                                          .h50 +
-                                                      item.profile_path
-                                                    : '/images/no-image.png'
-                                            "
+
+                                    <a @click="showVideoModal(video)">
+                                        <img
+                                            src="/images/uploads/play-vd.png"
                                             alt=""
                                         />
-                                    </v-avatar>
-                                </v-list-item-avatar>
+                                    </a>
+                                </div>
+                            </v-col>
+                        </v-row>
+                    </div>
+                    <div class="title-hd-sm">
+                        <h4>cast</h4>
+                        <a href="#" class="time"
+                            >Full Cast & Crew <i class="ion-ios-arrow-right"></i
+                        ></a>
+                    </div>
+                    <!-- movie cast -->
+                    <div class="mvcast-item">
+                        <v-virtual-scroll
+                            :items="$page.props.cast"
+                            :item-height="50"
+                            height="300"
+                        >
+                            <template v-slot:default="{ item }">
+                                <v-list-item>
+                                    <v-list-item-avatar>
+                                        <v-avatar size="56" class="profile">
+                                            <v-img
+                                                class="mx-3"
+                                                :src="
+                                                    item.profile_path
+                                                        ? $store.getters
+                                                              .profile_size_w45 +
+                                                          item.profile_path
+                                                        : '/images/no-image.png'
+                                                "
+                                                alt=""
+                                            />
+                                        </v-avatar>
+                                    </v-list-item-avatar>
 
-                                <v-list-item-content>
-                                    <v-list-item-title>
-                                        <inertia-link
-                                            :href="
-                                                route('person.show', item.id)
-                                            "
-                                            >{{ item.name }}</inertia-link
-                                        >
-                                    </v-list-item-title>
-                                </v-list-item-content>
+                                    <v-list-item-content>
+                                        <v-list-item-title>
+                                            <inertia-link
+                                                :href="
+                                                    route(
+                                                        'person.show',
+                                                        item.id
+                                                    )
+                                                "
+                                                >{{ item.name }}</inertia-link
+                                            >
+                                        </v-list-item-title>
+                                    </v-list-item-content>
 
-                                <v-list-item-action>
-                                    <p>... {{ item.character }}</p>
-                                </v-list-item-action>
-                            </v-list-item>
-                        </template>
-                    </v-virtual-scroll>
-                </div>
-            </div>
-            <div class="col-md-4 col-xs-12 col-sm-12">
-                <div class="sb-it">
-                    <h6>Director:</h6>
-                    <p
-                        v-for="director in $page.props.directors"
-                        :key="director.index"
-                    >
-                        <a href="#">{{ director.name }}</a>
-                    </p>
-                </div>
-                <div class="sb-it">
-                    <h6>Writer:</h6>
-                    <p
-                        v-for="writer in $page.props.writers"
-                        :key="writer.index"
-                    >
-                        <a href="#">{{ writer.name }}</a>
-                    </p>
-                </div>
-                <div class="sb-it">
-                    <h6>Release Date:</h6>
-                    <p>{{ $page.props.movie.release_date }}</p>
-                </div>
-                <div class="sb-it">
-                    <h6>Runtime:</h6>
-                    <p>{{ $page.props.movie.runtime }} mins.</p>
-                </div>
-                <div class="sb-it">
-                    <h6>Genres:</h6>
+                                    <v-list-item-action>
+                                        <p>... {{ item.character }}</p>
+                                    </v-list-item-action>
+                                </v-list-item>
+                            </template>
+                        </v-virtual-scroll>
+                    </div>
+                </v-col>
 
-                    <p>
-                        <a
-                            v-for="genre in $page.props.movie.genres"
-                            :key="genre.id"
-                            href="#"
-                            >{{ genre.name }},
-                        </a>
-                    </p>
-                </div>
-            </div>
+                <v-col cols="12" sm="12" md="4">
+                    <div class="sb-it">
+                        <h6>Director:</h6>
+                        <p
+                            v-for="director in $page.props.directors"
+                            :key="director.index"
+                        >
+                            <a href="#">{{ director.name }}</a>
+                        </p>
+                    </div>
+                    <div class="sb-it">
+                        <h6>Writer:</h6>
+                        <p
+                            v-for="writer in $page.props.writers"
+                            :key="writer.index"
+                        >
+                            <a href="#">{{ writer.name }}</a>
+                        </p>
+                    </div>
+                    <div class="sb-it">
+                        <h6>Release Date:</h6>
+                        <p>{{ $page.props.movie.release_date }}</p>
+                    </div>
+                    <div class="sb-it">
+                        <h6>Runtime:</h6>
+                        <p>{{ $page.props.movie.runtime }} mins.</p>
+                    </div>
+                    <div class="sb-it">
+                        <h6>Genres:</h6>
+
+                        <p>
+                            <a
+                                v-for="genre in $page.props.movie.genres"
+                                :key="genre.id"
+                                href="#"
+                                >{{ genre.name }},
+                            </a>
+                        </p>
+                    </div>
+                </v-col>
+            </v-row>
         </v-container>
     </div>
 </template>

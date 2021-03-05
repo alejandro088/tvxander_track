@@ -1,6 +1,13 @@
 <template>
     <div class="movie-img">
-        <img :src="`https://image.tmdb.org/t/p/w300${posterPath}`" alt="" />
+        <img
+            :src="
+                $store.state.dirImagesTmdb.base_url +
+                    $store.state.dirImagesTmdb.poster_sizes[6] +
+                    posterPath
+            "
+            alt=""
+        />
         <div class="movie-btn" v-if="$page.props.videos.results.length > 0">
             <div class="btn-transform transform-vertical red">
                 <div>

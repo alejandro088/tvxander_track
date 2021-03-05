@@ -26,7 +26,7 @@
                         <div class="mv-ceb">
                             <v-img
                                 :src="
-                                    $store.state.dirImagesTmdb.w300 +
+                                    $store.getters.profile_size_w185 +
                                         $page.props.person.profile_path
                                 "
                             />

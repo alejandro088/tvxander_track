@@ -15,16 +15,10 @@ Vue.prototype.$date = DateTime;
 
 Vue.use(VueYoutube);
 
-import Vuetify from "vuetify"; // path to vuetify export
-import "vuetify/dist/vuetify.min.css";
+import vuetify from '@/plugins/vuetify' // path to vuetify export
 
-import { MdSwitch } from "vue-material/dist/components";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
-
-Vue.use(MdSwitch);
-
-Vue.use(Vuetify);
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaPlugin);
@@ -32,10 +26,16 @@ Vue.use(PortalVue);
 
 const app = document.getElementById("app");
 
+Vue.filter('humanize', function (value) {
+    return DateTime
+                .fromISO(value)
+                .setLocale("es")
+                .toRelative();
+        
+  })
+
 new Vue({
-    vuetify: new Vuetify({
-        theme: { dark: true }
-    }),
+    vuetify,
     store: store,
     render: h =>
         h(InertiaApp, {

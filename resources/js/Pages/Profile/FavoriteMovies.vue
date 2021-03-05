@@ -39,7 +39,7 @@
                             >
                                 <img
                                     :src="
-                                        `https://image.tmdb.org/t/p/w200${item.poster_path}`
+                                        $store.getters.poster_size_w154 + item.poster_path
                                     "
                                     alt=""
                                 />

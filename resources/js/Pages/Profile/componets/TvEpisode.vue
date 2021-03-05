@@ -14,15 +14,12 @@
         <div class="col-md-2 border ">
             <p class="text-center">Watched?</p>
 
-            <md-switch
+            <v-switch
                 v-model="watched"
-                :class="{
-                    'md-primary': isComplete,
-                    'md-success': isWaiting,
-                    'md-secondary': hasError
-                }"
-            >
-            </md-switch>
+                @change="setWatched(episode)"
+                :color="color"
+                hide-details
+            ></v-switch>
         </div>
     </div>
 </template>
@@ -32,17 +29,50 @@ export default {
     props: ["episode", "initWatched"],
     data() {
         return {
-            hasError: false,
-            isWaiting: true,
-            isComplete: false,
+            color: 'primary',
             watched: this.initWatched
         };
     },
-    beforeUpdate() {
-        this.$store.dispatch("setWatched", {
-            episode: this.episode,
-            checked: this.watched
-        });
+    methods: {
+        setWatched(episode) {
+            this.color = 'success';
+
+            window.axios
+                .post(
+                    `/dashboard/episode/${episode.id}/watched`,
+                    {
+                        check: this.watched
+                    },
+                    {
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            )
+                        }
+                    }
+                )
+                .then(
+                    response => {
+                        this.color = 'primary';
+
+                        this.$root.$emit("notification", {
+                            icon: "success",
+                            message: this.watched
+                                ? "The episode has been watched"
+                                : "The episode has been unwatched"
+                        });
+                    },
+                    response => {
+                        // error callback
+                        this.color = 'error';
+
+                        this.$root.$emit("notification", {
+                            icon: "error",
+                            message: "An error has occurred"
+                        });
+                    }
+                );
+        }
     }
 };
 </script>

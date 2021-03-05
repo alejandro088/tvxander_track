@@ -12,7 +12,8 @@
                             <v-col md="4">
                                 <img
                                     :src="
-                                        `https://image.tmdb.org/t/p/w300${season.poster_path}`
+                                       $store.getters.poster_size_w154 +
+                                            season.poster_path
                                     "
                                     alt=""
                                 />

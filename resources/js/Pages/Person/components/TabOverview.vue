@@ -11,14 +11,14 @@
                 <div class="title-hd-sm">
                     <h4>Photos</h4>
                     <a href="#" class="time"
-                        >{{ $page.props.images.profiles.length }} Photos
+                        >{{ $page.props.person.images.profiles.length }} Photos
                         <i class="ion-ios-arrow-right"></i
                     ></a>
                 </div>
                 <div class="mvsingle-item ov-item">
                     <v-row>
                         <v-col
-                            v-for="image in $page.props.images.profiles"
+                            v-for="image in $page.props.person.images.profiles"
                             :key="image.file_path"
                             class="d-flex child-flex"
                             cols="4"
@@ -27,12 +27,12 @@
                                 class="img-lightbox"
                                 data-fancybox-group="gallery"
                                 :href="
-                                    $store.state.dirImagesTmdb.w500 +
+                                    $store.getters.profile_size_original +
                                         image.file_path
                                 "
                                 ><v-img
                                     :src="
-                                        $store.state.dirImagesTmdb.w200 +
+                                        $store.getters.profile_size_w185 +
                                             image.file_path
                                     "
                                     alt=""
@@ -66,13 +66,13 @@
                 <div class="mvcast-item">
                     <div
                         class="cast-it"
-                        v-for="movieCredit in $page.props.movieCredits.cast"
+                        v-for="movieCredit in $page.props.person.movie_credits.cast"
                         :key="movieCredit.id"
                     >
                         <div class="cast-left cebleb-film">
                             <img
                                 :src="
-                                    $store.state.dirImagesTmdb.h50 +
+                                    $store.getters.poster_size_w92 +
                                         movieCredit.poster_path
                                 "
                                 alt=""

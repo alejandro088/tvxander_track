@@ -5,53 +5,48 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 
 use Illuminate\Http\Request;
-use Tmdb\Repository\MovieRepository;
+use App\Services\TvXanderTmdb\Repositories\MovieRepository;
 
 class MovieController extends Controller
 {
-
     public function show($movie)
     {
 
-        $theMovie = $this->client->getMoviesApi()->getMovie($movie);
+        $repo = new MovieRepository($this->client);
 
-        $i = $this->client->getMoviesApi()->getImages($movie);
+        $theMovie = $repo->getMovie($movie, [
+            'language' => 'es',
+             'append_to_response' => 'videos,images,credits',
+             'include_image_language' => 'en,null'
+        ]);
 
-        $videos = $this->client->getMoviesApi()->getVideos($movie);
+        $credits = $theMovie->credits;
 
-        $credits = $this->client->getMoviesApi()->getCredits($movie);
-
-        $keywords = $this->client->getMoviesApi()->getKeywords($movie);
-
-        $relateds = $this->client->getMoviesApi()->getSimilar($movie);
+        $relateds = $repo->getSimilar($movie, [
+            'language' => 'es'
+        ]);
 
         $isMyMovieFav = (auth()->user() && auth()->user()->favorites->where('external_id', $movie)->first()) ? true : false;
 
-        $crew = collect($credits['crew']);
+        $crew = collect($credits->crew);
 
-        $cast = collect($credits['cast']);
+        $cast = collect($credits->cast);
 
-        $directors = $crew->filter(function ($value, $key) {
-            return $value['job'] == 'Director';
+        $directors = $crew->filter(function ($value) {
+            return $value->job == 'Director';
         });
 
-        $writers = $crew->filter(function ($value, $key) {
-            return $value['job'] == 'Writer';
+        $writers = $crew->filter(function ($value) {
+            return $value->job == 'Writer';
         });
-
-        $images['backdrops'] = collect($i['backdrops'])->forPage(1,9)->toArray();
-
-        $images['posters'] = collect($i['posters'])->forPage(1,9)->toArray();
 
         return Inertia::render('Movie/Show', [
             'movie' => $theMovie,
-            'images' => $images,
-            'videos' => $videos,
+            'videos' => $theMovie->videos,
             'directors' => $directors->all(),
             'writers' => $writers->all(),
             'cast' => $cast,
             'crew' => $crew,
-            'keywords' => $keywords,
             'relateds' => $relateds,
             'isMyMovieFav' => $isMyMovieFav
         ]);
@@ -62,21 +57,32 @@ class MovieController extends Controller
         $repository = new MovieRepository($this->client);
 
         $collection = $movie ? $repository->$get($movie) : $repository->$get();
+        
+        return $collection->results;
+    }
 
-        $movies = array();
+    public function discoverByGenres()
+    {
+        $repository = new MovieRepository($this->client);
 
-        foreach ($collection as $item) {
+        $genres = [
+            'action' => 28, 
+            'comedy' => 35, 
+            'drama' => 18,
+            'terror' => 27,
+            'scifi' => 878,
+            'suspense' => 53
+        ];
 
-            $movies[] = [
-                'id' => $item->getId(),
-                'title' => $item->getTitle(),
-                'posterPath' => $item->getPosterPath(),
-                'popularity' => $item->getPopularity(),
-                'voteAverage' => $item->getVoteAverage(),
-                'originalTitle' => $item->getOriginalTitle()
-            ];
+        $collection = array();
+
+        foreach ($genres as $key => $genre) {
+            $collection[$key] = $repository->getDiscover([
+                'with_genres' => $genre,
+            ]);
         }
         
-        return $movies;
+        
+        return $collection;
     }
 }

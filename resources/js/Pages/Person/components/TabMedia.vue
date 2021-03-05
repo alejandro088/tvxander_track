@@ -10,13 +10,13 @@
             <div class="title-hd-sm">
                 <h4>
                     Profile Images
-                    <span>({{ $page.props.images.profiles.length }})</span>
+                    <span>({{ $page.props.person.images.profiles.length }})</span>
                 </h4>
             </div>
             <div class="mvsingle-item">
                 <v-row>
                     <v-col
-                        v-for="image in $page.props.images.profiles"
+                        v-for="image in $page.props.person.images.profiles"
                         :key="image.file_path"
                         class="d-flex child-flex"
                         cols="4"
@@ -25,12 +25,12 @@
                             class="img-lightbox"
                             data-fancybox-group="gallery"
                             :href="
-                                $store.state.dirImagesTmdb.w500 +
+                                $store.getters.profile_size_original +
                                     image.file_path
                             "
                             ><v-img
                                 :src="
-                                    $store.state.dirImagesTmdb.w200 +
+                                    $store.getters.profile_size_w185 +
                                         image.file_path
                                 "
                                 alt=""
@@ -58,14 +58,14 @@
                 <h4>
                     Tagged Images
                     <span>
-                        ({{ $page.props.taggedImages.results.length }})</span
+                        ({{ $page.props.person.tagged_images.results.length }})</span
                     >
                 </h4>
             </div>
             <div class="mvsingle-item">
                 <v-row>
                     <v-col
-                        v-for="image in $page.props.taggedImages.results"
+                        v-for="image in $page.props.person.tagged_images.results"
                         :key="image.file_path"
                         class="d-flex child-flex"
                         cols="4"
@@ -74,12 +74,12 @@
                             class="img-lightbox"
                             data-fancybox-group="gallery"
                             :href="
-                                $store.state.dirImagesTmdb.w500 +
+                                $store.getters.profile_size_original +
                                     image.file_path
                             "
                             ><v-img
                                 :src="
-                                    $store.state.dirImagesTmdb.w200 +
+                                    $store.getters.profile_size_w185 +
                                         image.file_path
                                 "
                                 alt=""

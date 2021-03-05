@@ -1,19 +1,9 @@
 <template>
     <!-- BEGIN | Header -->
-    <header class="ht-header full-width-hd sticky">
-        <v-container>
-            <div class="row">
-                <app-main-nav />
-                <v-col flex>
-                    <input
-                        type="text"
-                        v-model="query"
-                        @keyup.enter.prevent="search"
-                        placeholder="Search for a movie, TV Show or celebrity that you are looking for"
-                    />
-                </v-col>
-            </div>
-        </v-container>
+    <header class="tw-ht-header tw-full-width-hd">
+        
+        <app-main-nav />
+            
     </header>
     <!-- END | Header -->
 </template>
@@ -39,13 +29,10 @@ export default {
         return {
             loginModal: false,
             registerModal: false,
-            query: ""
         };
     },
     methods: {
-        search() {
-            this.$inertia.get("/search", { query: this.query });
-        }
+        
     }
 };
 </script>

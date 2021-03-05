@@ -5,7 +5,7 @@
                 <v-row>
                     <v-col>
                         <h3>Cast & Crew of</h3>
-                        <h2>{{ $page["props"]["tv"].name }}</h2>
+                        <h2>{{ $page.props.tv.name }}</h2>
                         <!-- //== -->
 
                         <div class="title-hd-sm">
@@ -14,12 +14,18 @@
                         <div class="mvcast-item">
                             <div
                                 class="cast-it"
-                                v-for="director in $page['props']['directors']"
+                                v-for="director in $page.props.directors"
                                 :key="director.index"
                             >
                                 <div class="cast-left">
-                                    <h4>JW</h4>
-                                    <a href="#">{{ director.name }}</a>
+                                    <img
+                                        :src="
+                                            $store.getters.profile_size_w45 +
+                                                director.profile_path
+                                        "
+                                        alt=""
+                                    />
+                                    <inertia-link :href="route('person.show', director.id)">{{ director.name }}</inertia-link>
                                 </div>
                                 <p>... {{ director.job }}</p>
                             </div>
@@ -34,17 +40,18 @@
                         <div class="mvcast-item">
                             <div
                                 class="cast-it"
-                                v-for="cast in $page['props']['cast']"
+                                v-for="cast in $page.props.cast"
                                 :key="cast.index"
                             >
                                 <div class="cast-left">
                                     <img
                                         :src="
-                                            `https://www.themoviedb.org/t/p/w50_and_h50_face${cast.profile_path}`
+                                            $store.getters.profile_size_w45 +
+                                                cast.profile_path
                                         "
                                         alt=""
                                     />
-                                    <a href="#">{{ cast.name }}</a>
+                                    <inertia-link :href="route('person.show', cast.id)">{{ cast.name }}</inertia-link>
                                 </div>
                                 <p>... {{ cast.character }}</p>
                             </div>
@@ -58,12 +65,18 @@
                         <div class="mvcast-item">
                             <div
                                 class="cast-it"
-                                v-for="crew in $page['props']['crew']"
+                                v-for="crew in $page.props.crew"
                                 :key="crew.index"
                             >
                                 <div class="cast-left">
-                                    <h4>VA</h4>
-                                    <a href="#">{{ crew.name }}</a>
+                                    <img
+                                        :src="
+                                            $store.getters.profile_size_w45 +
+                                                crew.profile_path
+                                        "
+                                        alt=""
+                                    />
+                                    <inertia-link :href="route('person.show', crew.id)">{{ crew.name }}</inertia-link>
                                 </div>
                                 <p>... {{ crew.job }}</p>
                             </div>

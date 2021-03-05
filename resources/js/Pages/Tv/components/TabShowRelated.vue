@@ -28,7 +28,7 @@
             >
                 <img
                     :src="
-                        `https://www.themoviedb.org/t/p/w220_and_h330_face${related.poster_path}`
+                        $store.getters.poster_size_w154 + related.poster_path
                     "
                     alt=""
                 />

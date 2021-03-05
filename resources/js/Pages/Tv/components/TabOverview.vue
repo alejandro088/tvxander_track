@@ -9,8 +9,8 @@
                     <a href="#" class="time"
                         >All {{ $page.props.videos.results.length }} Videos &
                         {{
-                            $page.props.images.backdrops.length +
-                                $page.props.images.posters.length
+                            $page.props.tv.images.backdrops.length +
+                                $page.props.tv.images.posters.length
                         }}
                         Photos <i class="ion-ios-arrow-right"></i
                     ></a>
@@ -18,7 +18,7 @@
                 <div class="mvsingle-item ov-item">
                     <v-row>
                         <v-col
-                            v-for="image in $page.props.images.backdrops"
+                            v-for="image in $page.props.tv.images.backdrops"
                             :key="image.file_path"
                             class="d-flex child-flex"
                             cols="4"
@@ -27,12 +27,12 @@
                                 class="img-lightbox"
                                 data-fancybox-group="gallery"
                                 :href="
-                                    $store.state.dirImagesTmdb.w500 +
+                                    $store.getters.backdrop_size_original +
                                         image.file_path
                                 "
                                 ><v-img
                                     :src="
-                                        $store.state.dirImagesTmdb.w200 +
+                                        $store.getters.backdrop_size_w300 +
                                             image.file_path
                                     "
                                     alt=""
@@ -57,7 +57,7 @@
                     </v-row>
                     <v-row>
                         <v-col
-                            v-for="image in $page.props.images.posters"
+                            v-for="image in $page.props.tv.images.posters"
                             :key="image.file_path"
                             class="d-flex child-flex"
                             cols="4"
@@ -66,12 +66,13 @@
                                 class="img-lightbox"
                                 data-fancybox-group="gallery"
                                 :href="
-                                    $store.state.dirImagesTmdb.w500 +
+                                    $store.getters.poster_size_original +
                                         image.file_path
                                 "
                                 ><v-img
                                     :src="
-                                        `https://www.themoviedb.org/t/p/w100_and_h100_bestv2${image.file_path}`
+                                        $store.getters.poster_size_w154 +
+                                            image.file_path
                                     "
                                     alt=""
                                 >
@@ -135,12 +136,12 @@
                         <div class="cast-left">
                             <img
                                 :src="
-                                    $store.state.dirImagesTmdb.h50 +
+                                    $store.getters.profile_size_w45 +
                                         cast.profile_path
                                 "
                                 alt=""
                             />
-                            <a href="#">{{ cast.name }}</a>
+                            <inertia-link :href="route('person.show', cast.id)">{{ cast.name }}</inertia-link>
                         </div>
                         <p>... {{ cast.character }}</p>
                     </div>
@@ -153,7 +154,7 @@
                         v-for="director in $page.props.directors"
                         :key="director.index"
                     >
-                        <a href="#">{{ director.name }}</a>
+                        <inertia-link :href="route('person.show', director.id)">{{ director.name }}</inertia-link>
                     </p>
                 </div>
                 <div class="sb-it">
@@ -162,18 +163,17 @@
                         v-for="writer in $page.props.writers"
                         :key="writer.index"
                     >
-                        <a href="#">{{ writer.name }}</a>
+                        <inertia-link :href="route('person.show', writer.id)">{{ writer.name }}</inertia-link>
                     </p>
                 </div>
                 <div class="sb-it">
                     <h6>Stars:</h6>
                     <p>
-                        <a
-                            href="#"
+                        <inertia-link :href="route('person.show', cast.id)"
                             v-for="cast in $page.props.cast"
                             :key="cast.index"
                             >{{ cast.name }},
-                        </a>
+                        </inertia-link>
                     </p>
                 </div>
                 <div class="sb-it">
@@ -201,7 +201,7 @@
                     >
                         <img
                             :src="
-                                $store.state.dirImagesTmdb.h50 +
+                                 $store.getters.logo_size_w185 +
                                     network.logo_path
                             "
                             :alt="network.name"

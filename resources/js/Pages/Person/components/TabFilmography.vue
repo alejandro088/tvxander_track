@@ -11,7 +11,7 @@
                 <p>
                     Found
                     <span
-                        >{{ $page.props.movieCredits.cast.length }} movies</span
+                        >{{ $page.props.person.movie_credits.cast.length }} movies</span
                     >
                     in total
                 </p>
@@ -29,13 +29,13 @@
             <div class="mvcast-item">
                 <div
                     class="cast-it"
-                    v-for="movieCredit in $page.props.movieCredits.cast"
+                    v-for="movieCredit in $page.props.person.movie_credits.cast"
                     :key="movieCredit.id"
                 >
                     <div class="cast-left cebleb-film">
                         <img
                             :src="
-                                $store.state.dirImagesTmdb.h50 +
+                                $store.getters.poster_size_w92 +
                                     movieCredit.poster_path
                             "
                             alt=""

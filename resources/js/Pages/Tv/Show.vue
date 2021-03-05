@@ -26,6 +26,29 @@
                         <tv-movie-poster
                             :posterPath="$page.props.tv.poster_path"
                         />
+                        <div v-if="$page.props.providers.results.AR">
+                            <div>
+                                <div>
+                                    <h6>Contenido Disponible en:</h6>
+                                    <div
+                                        v-for="provider in $page.props.providers
+                                            .results.AR.flatrate"
+                                        :key="provider.provider_id"
+                                    >
+                                        <img
+                                            :src="
+                                                $store.state.dirImagesTmdb
+                                                    .base_url +
+                                                    $store.state.dirImagesTmdb
+                                                        .logo_sizes[1] +
+                                                    provider.logo_path
+                                            "
+                                            alt=""
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-8 col-sm-12 col-xs-12">
                         <div class="movie-single-ct main-content">
@@ -205,8 +228,19 @@ export default {
                 );
                 console.log(response);
                 this.myShow = true;
+
+                this.$root.$emit("notification", {
+                            icon: "success",
+                            message:"The show has been added to your list!!"
+                        });
+
             } catch (error) {
                 console.log(error);
+
+                this.$root.$emit("notification", {
+                            icon: "error",
+                            message:"An error has occurred"
+                        });
             }
         },
         removeToList() {

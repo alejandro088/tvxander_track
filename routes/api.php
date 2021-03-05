@@ -29,3 +29,5 @@ Route::get('/movies/latest', [MovieController::class, 'latest']);
 Route::get('/movies/toprated', [MovieController::class, 'toprated']);
 
 Route::get('/movies/upcoming', [MovieController::class, 'upcoming']);
+
+Route::get('/movies/discoverByGenres', [MovieController::class, 'discoverByGenres']);

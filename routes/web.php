@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ShowController;
+use App\Http\Controllers\TmdbController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\PersonController;
@@ -71,5 +72,3 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/dashboard/episode/{episo
 Route::middleware(['auth:sanctum', 'verified'])->post('/dashboard/favorite/{source}', [UserController::class, 'addToFavorite'])->name('tv.favorite');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/events', [ShowController::class, 'events'])->name('tv.events');
-
-

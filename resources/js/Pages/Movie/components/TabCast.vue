@@ -36,8 +36,7 @@
                                         class="mx-3"
                                         :src="
                                             item.profile_path
-                                                ? $store.state.dirImagesTmdb
-                                                      .h50 + item.profile_path
+                                                ? $store.getters.profile_size_w45 + item.profile_path
                                                 : '/images/no-image.png'
                                         "
                                         alt=""
@@ -79,8 +78,7 @@
                                         class="mx-3"
                                         :src="
                                             item.profile_path
-                                                ? $store.state.dirImagesTmdb
-                                                      .h50 + item.profile_path
+                                                ? $store.getters.profile_size_w45 + item.profile_path
                                                 : '/images/no-image.png'
                                         "
                                         alt=""

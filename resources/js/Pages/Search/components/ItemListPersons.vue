@@ -1,27 +1,37 @@
 <template>
     <div>
-        <div class="movie-item-style-2" v-for="item in results" :key="item.id">
-            <img
-                :src="
-                    item.profilePath
-                        ? `https://image.tmdb.org/t/p/w200${item.profilePath}`
-                        : '/images/no-image.png'
-                "
-                alt=""
-            />
-            <div class="mv-item-infor">
-                <h6>
-                    <inertia-link :href="route('person.show', { id: item.id })">
-                        {{ item.name }}
-                        <span v-if="item.birthday">({{ item.birthday }})</span>
-                    </inertia-link>
-                </h6>
-                <span>{{ item.placeOfBirth }}</span>
-                <p class="describe">
-                    {{ item.biography }}
-                </p>
-            </div>
-        </div>
+        <v-container>
+            <v-row>
+                <v-col
+                    v-for="item in results"
+                    :key="item.id"
+                    cols="4"
+                >
+                    <v-card flat tile>
+
+                        <v-card-title>
+                            <inertia-link
+                                    :href="
+                                        route('person.show', { id: item.id })
+                                    "
+                                >
+                                    {{ item.name }}
+                                </inertia-link>
+                        </v-card-title>
+                    <img
+                        :src="
+                            item.profile_path
+                                ? $store.getters.profile_size_w185 +
+                                  item.profile_path
+                                : '/images/no-image.png'
+                        "
+                        alt=""
+                    />
+                    
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-container>
     </div>
 </template>
 
@@ -31,4 +41,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.person-item {
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    width: 300px;
+    position: relative;
+    margin-right: 23px;
+}
+</style>

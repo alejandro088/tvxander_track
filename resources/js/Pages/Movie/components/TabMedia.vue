@@ -46,8 +46,8 @@
                     Photos
                     <span>
                         ({{
-                            $page.props.images.backdrops.length +
-                                $page.props.images.posters.length
+                            $page.props.movie.images.backdrops.length +
+                                $page.props.movie.images.posters.length
                         }})</span
                     >
                 </h4>
@@ -55,7 +55,7 @@
             <div class="mvsingle-item ov-item">
                 <v-row>
                     <v-col
-                        v-for="image in $page.props.images.backdrops"
+                        v-for="image in $page.props.movie.images.backdrops"
                         :key="image.file_path"
                         class="d-flex child-flex"
                         cols="4"
@@ -64,12 +64,12 @@
                             class="img-lightbox"
                             data-fancybox-group="gallery"
                             :href="
-                                $store.state.dirImagesTmdb.w500 +
+                                $store.getters.backdrop_size_original +
                                     image.file_path
                             "
                             ><v-img
                                 :src="
-                                    $store.state.dirImagesTmdb.w200 +
+                                    $store.getters.backdrop_size_w300 +
                                         image.file_path
                                 "
                                 alt=""
@@ -94,7 +94,7 @@
                 </v-row>
                 <v-row>
                     <v-col
-                        v-for="image in $page.props.images.posters"
+                        v-for="image in $page.props.movie.images.posters"
                         :key="image.file_path"
                         class="d-flex child-flex"
                         cols="4"
@@ -103,12 +103,12 @@
                             class="img-lightbox"
                             data-fancybox-group="gallery"
                             :href="
-                                $store.state.dirImagesTmdb.w500 +
+                                $store.getters.poster_size_original +
                                     image.file_path
                             "
                             ><v-img
                                 :src="
-                                    $store.state.dirImagesTmdb.w300 +
+                                    $store.getters.poster_size_w154 +
                                         image.file_path
                                 "
                                 alt=""

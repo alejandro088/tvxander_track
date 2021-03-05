@@ -43,34 +43,34 @@
             </v-row>
 
             <div class="col-12 title-hd-sm">
-                <h4>Photos <span> ({{ $page.props.images.backdrops + $page.props.images.posters}})</span></h4>
+                <h4>Photos <span> ({{ $page.props.tv.images.backdrops.length + $page.props.tv.images.posters.length}})</span></h4>
             </div>
             <div class="mvsingle-item">
                 <a
-                    v-for="image in $page.props.images.backdrops"
+                    v-for="image in $page.props.tv.images.backdrops"
                     :key="image.index"
                     class="img-lightbox"
                     data-fancybox-group="gallery"
                     :href="
-                        `https://www.themoviedb.org/t/p/w533_and_h300_bestv2${image.file_path}`
+                        $store.getters.backdrop_size_original + image.file_path
                     "
                     ><img
                         :src="
-                            `https://www.themoviedb.org/t/p/w100_and_h100_bestv2${image.file_path}`
+                            $store.getters.backdrop_size_w300 + image.file_path
                         "
                         alt=""
                 /></a>
                 <a
-                    v-for="image in $page.props.images.posters"
+                    v-for="image in $page.props.tv.images.posters"
                     :key="image.index"
                     class="img-lightbox"
                     data-fancybox-group="gallery"
                     :href="
-                        `https://www.themoviedb.org/t/p/w533_and_h300_bestv2${image.file_path}`
+                        $store.getters.poster_size_original + image.file_path
                     "
                     ><img
                         :src="
-                            `https://www.themoviedb.org/t/p/w100_and_h100_bestv2${image.file_path}`
+                             $store.getters.poster_size_w154 + image.file_path
                         "
                         alt=""
                 /></a>
@@ -92,10 +92,22 @@ export default {
             ytvideo: ""
         };
     },
+    mounted() {
+        //== js for image lightbox
+        var imglightbox = $(".img-lightbox");
+        imglightbox.fancybox({
+            helpers: {
+                title: {
+                    type: "float"
+                },
+                overlay: {
+                    locked: false
+                }
+            }
+        });
+    },
     methods: {
         showVideoModal(video) {
-            this.ytvideo = video;
-            this.videoModal = true;
 
             this.$store.state.videoModal = true;
             this.$store.state.ytvideo = video;

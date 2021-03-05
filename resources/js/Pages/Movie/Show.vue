@@ -41,7 +41,7 @@
                                     v-if="!myMovieFav"
                                     class="parent-btn"
                                     @click="addToFavs"
-                                    ><i class="ion-heart"></i> Add to
+                                    ><v-icon dark>mdi-heart</v-icon> Add to
                                     Favorite</a
                                 >
                                 <a
@@ -50,29 +50,24 @@
                                     class="parent-btn"
                                     @click="removeToFavs"
                                 >
-                                    <i class="ion-heart"></i> Remove to
+                                    <v-icon dark>mdi-heart</v-icon> Remove to
                                     Favorites
                                 </a>
                                 <div class="hover-bnt">
                                     <a href="#" class="parent-btn"
-                                        ><i class="ion-android-share-alt"></i
-                                        >share</a
+                                        ><v-icon dark>mdi-share</v-icon>share</a
                                     >
                                     <div class="hvr-item">
-                                        <a href="#" class="hvr-grow"
-                                            ><i class="ion-social-facebook"></i
-                                        ></a>
-                                        <a href="#" class="hvr-grow"
-                                            ><i class="ion-social-twitter"></i
-                                        ></a>
-                                        <a href="#" class="hvr-grow"
-                                            ><i
-                                                class="ion-social-googleplus"
-                                            ></i
-                                        ></a>
-                                        <a href="#" class="hvr-grow"
-                                            ><i class="ion-social-youtube"></i
-                                        ></a>
+                                        <a href="#" class="hvr-grow">
+                                            <v-icon dark>mdi-facebook</v-icon>
+                                        </a>
+                                        <a href="#" class="hvr-grow">
+                                            <v-icon dark>mdi-twitter</v-icon>
+                                        </a>
+
+                                        <a href="#" class="hvr-grow">
+                                            <v-icon dark>mdi-youtube</v-icon>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -162,6 +157,10 @@ export default {
                 );
                 console.log(response);
                 this.myMovieFav = true;
+                this.$root.$emit("notification", {
+                    icon: "success",
+                    message: "The movie has been added to your favorites!!"
+                });
             } catch (error) {
                 console.log(error);
             }

@@ -3,8 +3,8 @@
         <div class="movie-item-style-2" v-for="item in results" :key="item.id">
             <img
                 :src="
-                    item.posterPath
-                        ? `https://image.tmdb.org/t/p/w200${item.posterPath}`
+                    item.poster_path
+                        ?  $store.getters.poster_size_w154 + item.poster_path
                         : '/images/no-image.png'
                 "
                 alt=""
@@ -13,10 +13,10 @@
                 <h6>
                     <inertia-link :href="route('movie.show', { id: item.id })">
                         {{ item.title }}
-                        <span v-if="item.releaseDate"
+                        <span v-if="item.release_date"
                             >({{
                                 $date
-                                    .fromSQL(item.releaseDate.date)
+                                    .fromSQL(item.release_date)
                                     .toFormat("yyyy")
                             }})</span
                         >
@@ -24,7 +24,7 @@
                 </h6>
                 <p class="rate">
                     <i class="ion-android-star"></i>
-                    <span>{{ item.voteAverage }}</span> /10
+                    <span>{{ item.vote_average }}</span> /10
                 </p>
                 <p class="describe">
                     {{ item.overview }}

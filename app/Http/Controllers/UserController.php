@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
+use App\Services\TvXanderTmdb\Repositories\MovieRepository;
 
 class UserController extends Controller
 {
@@ -34,10 +35,16 @@ class UserController extends Controller
         $favoriteMovies = auth()->user()->favorites()->where('type', '\App\Model\Movie::class')->get();
 
         $movies = array();
+
+        $repo = new MovieRepository($this->client);
         
         foreach ($favoriteMovies as $movie) {
-            
-            $movies[] = $this->client->getMoviesApi()->getMovie($movie->external_id);
+
+            $movies[] = $repo->getMovie($movie->external_id, [
+                'language' => 'es',
+                 'append_to_response' => 'videos,images,credits',
+                 'include_image_language' => 'en,null'
+            ]);
             
         }
 
