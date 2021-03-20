@@ -98,7 +98,7 @@
 
                         <v-divider />
 
-                        <v-row>
+                        <v-row class="my-3">
                             <v-col
                                 v-for="video in $page.props.videos.results"
                                 :key="video.key"

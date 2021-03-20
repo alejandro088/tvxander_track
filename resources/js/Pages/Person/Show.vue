@@ -1,23 +1,6 @@
 <template>
     <app-layout>
-        <div class="hero common-hero">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="hero-ct">
-                            <h1>Show celebrite</h1>
-                            <ul class="breadcumb">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li>
-                                    <span class="ion-ios-arrow-right"></span>
-                                    View details
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <source-breadcumb title="Show celebrite" />
 
         <div class="page-single movie-single">
             <div class="container">
@@ -90,6 +73,7 @@ import TabOverview from "./components/TabOverview";
 import TabMedia from "./components/TabMedia";
 import TabBiography from "./components/TabBiography";
 import TabFilmography from "./components/TabFilmography";
+import SourceBreadcumb from "@/Tvxander/UserBreadcumb";
 
 export default {
     components: {
@@ -99,7 +83,8 @@ export default {
         TabOverview,
         TabMedia,
         TabBiography,
-        TabFilmography
+        TabFilmography,
+        SourceBreadcumb
     },
     props: ["movie", "isMyMovieFav"],
     data() {

@@ -1,23 +1,7 @@
 <template>
     <app-layout>
-        <div class="hero common-hero">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="hero-ct">
-                            <h1>Show movie</h1>
-                            <ul class="breadcumb">
-                                <li class="active"><a href="#">Home</a></li>
-                                <li>
-                                    <span class="ion-ios-arrow-right"></span>
-                                    View details
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
+        <source-breadcumb title="Show movie" />
 
         <div class="page-single movie-single movie_single">
             <div class="container">
@@ -41,7 +25,7 @@
                                     v-if="!myMovieFav"
                                     class="parent-btn"
                                     @click="addToFavs"
-                                    ><v-icon dark>mdi-heart</v-icon> Add to
+                                    ><i class="ion-heart"></i> Add to
                                     Favorite</a
                                 >
                                 <a
@@ -50,26 +34,13 @@
                                     class="parent-btn"
                                     @click="removeToFavs"
                                 >
-                                    <v-icon dark>mdi-heart</v-icon> Remove to
+                                    <i class="ion-heart"></i> Remove to
                                     Favorites
                                 </a>
-                                <div class="hover-bnt">
-                                    <a href="#" class="parent-btn"
-                                        ><v-icon dark>mdi-share</v-icon>share</a
-                                    >
-                                    <div class="hvr-item">
-                                        <a href="#" class="hvr-grow">
-                                            <v-icon dark>mdi-facebook</v-icon>
-                                        </a>
-                                        <a href="#" class="hvr-grow">
-                                            <v-icon dark>mdi-twitter</v-icon>
-                                        </a>
+                                
 
-                                        <a href="#" class="hvr-grow">
-                                            <v-icon dark>mdi-youtube</v-icon>
-                                        </a>
-                                    </div>
-                                </div>
+                                <btn-share />
+                                
                             </div>
                             <div class="movie-rate">
                                 <div class="rate">
@@ -122,13 +93,17 @@ import AppLayout from "@/Layouts/AppLayout";
 import TvMoviePoster from "@/Tvxander/TvMoviePoster";
 import TvxanderTabs from "@/Tvxander/TvxanderTabs";
 import TvxanderVideoModal from "@/Tvxander/TvxanderVideoModal";
+import BtnShare from "@/Tvxander/BtnShare";
+import SourceBreadcumb from "@/Tvxander/UserBreadcumb";
 
 export default {
     components: {
         AppLayout,
         TvMoviePoster,
         TvxanderTabs,
-        TvxanderVideoModal
+        TvxanderVideoModal,
+        BtnShare,
+        SourceBreadcumb
     },
     props: ["movie", "isMyMovieFav"],
     data() {

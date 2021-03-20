@@ -1,11 +1,13 @@
 <template>
-    <FullCalendar :options="calendarOptions" />
+    <FullCalendar :options="calendarOptions" @eventDestroy="eventDestroy" />
 </template>
 
 <script>
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import tippy from "tippy.js";
+import "tippy.js/dist/tippy.css";
 
 export default {
     components: {
@@ -17,14 +19,7 @@ export default {
                 plugins: [dayGridPlugin, interactionPlugin],
                 initialView: "dayGridMonth",
                 events: [],
-                eventDidMount: function(info) {
-                    console.log(info.event.extendedProps);
-                    console.log(info.el);
-                     $(info.el).tooltip({title: info.event.extendedProps.description,
-                            container: 'body',
-                            delay: { "show": 500, "hide": 300 }
-                    });
-                }
+                eventDidMount: this.getEventDetailsPopup,
             }
         };
     },
@@ -32,7 +27,24 @@ export default {
         axios.get(`/events`).then(response => {
             this.calendarOptions.events = response.data;
         });
-    }
+    },
+    methods: {
+        getEventDetailsPopup(info) {
+            tippy(info.el, {
+                content: info.event.extendedProps.description,
+                delay: { show: 500, hide: 300 },
+            });
+        },
+        eventDestroy(info) {
+            //get uuid
+            let id = parseInt(info.el.getAttribute("data-vue-id"));
+
+            if (this.eventsObj[id]) {
+                //if exist destroy
+                this.eventsObj[id].$destroy(true);
+            }
+        },
+    },
 };
 </script>
 

@@ -1,10 +1,10 @@
 <template>
-    <div class="hero user-hero">
+    <div class="hero common-hero">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="hero-ct">
-                        <h1>{{ $page.props.user.name }} profile</h1>
+                        <h1>{{ title }}</h1>
                         <ul class="breadcumb">
                             <li class="active">
                                 <inertia-link :href="route('home')">
@@ -12,8 +12,8 @@
                                 </inertia-link>
                             </li>
                             <li>
-                                <span class="ion-ios-arrow-right"></span
-                                >{{ section }}
+                                <span class="ion-ios-arrow-right"></span>
+                                View details
                             </li>
                         </ul>
                     </div>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    props: ["section"]
+    props: ["title"]
 };
 </script>
 
