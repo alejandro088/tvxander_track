@@ -227,11 +227,9 @@
 </template>
 
 <script>
-import TvxanderVideoModal from "@/Tvxander/TvxanderVideoModal";
 
 export default {
     components: {
-        TvxanderVideoModal
     },
     data() {
         return {

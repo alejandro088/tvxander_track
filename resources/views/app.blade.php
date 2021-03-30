@@ -11,7 +11,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href='//fonts.googleapis.com/css?family=Dosis:400,700,500|Nunito:300,400,600' />
-
+        <link rel="icon" href="/favicon.ico">
         
         <!-- CSS files -->
         <link href="//cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">

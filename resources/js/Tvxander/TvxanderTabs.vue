@@ -1,6 +1,6 @@
 <template>
     <v-card elevation="2" outlined>
-        <v-tabs v-model="tabs" color="red" dark>
+        <v-tabs v-model="tabs" color="red" dark show-arrows>
             <v-tab v-for="title in titles" :key="title" :title="title" active>
                 {{ title }}
             </v-tab>
@@ -56,25 +56,6 @@ export default {
     color: #abb7c4;
     font-weight: bold;
     text-transform: uppercase;
-}
-
-.v-tab {
-    font-family: "Dosis", sans-serif;
-    font-size: 14px;
-    color: #abb7c4;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.v-tab:hover {
-    color: #dcf836;
-}
-.v-tab--active {
-    color: #dcf836;
-}
-
-.v-tab--active,
-.v-tab:hover {
-    border-bottom: 3px solid #dcf836;
 }
 
 .bg-tab-item {

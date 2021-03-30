@@ -9,29 +9,29 @@
             <p>Account Details</p>
             <ul>
                 <li>
-                    <inertia-link :href="route('dashboard')"
-                        >Profile</inertia-link
-                    >
+                    <inertia-link :href="route('dashboard')">
+                        Profile
+                    </inertia-link>
                 </li>
                 <li>
-                    <inertia-link :href="route('user.favorite.movies')"
-                        >Favorite movies</inertia-link
-                    >
+                    <inertia-link :href="route('user.favorite.movies')">
+                        Favorite movies
+                    </inertia-link>
                 </li>
                 <li>
-                    <inertia-link href="/dashboard/calendar"
-                        >Calendar</inertia-link
-                    >
+                    <inertia-link href="/dashboard/calendar">
+                        Calendar
+                    </inertia-link>
                 </li>
                 <li>
-                    <inertia-link href="/dashboard/myshows"
-                        >My Shows</inertia-link
-                    >
+                    <inertia-link href="/dashboard/myshows">
+                        My Shows
+                    </inertia-link>
                 </li>
                 <li>
-                    <inertia-link href="/dashboard/unwatched"
-                        >Unwatched</inertia-link
-                    >
+                    <inertia-link href="/dashboard/unwatched">
+                        Unwatched
+                    </inertia-link>
                 </li>
             </ul>
         </div>

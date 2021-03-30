@@ -120,9 +120,6 @@ import TabSeason from "./components/TabSeason";
 import TabShowRelated from "./components/TabShowRelated";
 import TvMoviePoster from "@/Tvxander/TvMoviePoster";
 import TvxanderTabs from "@/Tvxander/TvxanderTabs";
-import TvxanderVideoModal from "@/Tvxander/TvxanderVideoModal";
-import BtnShare from "@/Tvxander/BtnShare";
-import SourceBreadcumb from "@/Tvxander/UserBreadcumb";
 
 export default {
     components: {
@@ -133,10 +130,7 @@ export default {
         TabSeason,
         TabShowRelated,
         TvMoviePoster,
-        TvxanderTabs,
-        TvxanderVideoModal,
-        BtnShare,
-        SourceBreadcumb
+        TvxanderTabs
     },
     props: ["tv", "isMyShow", "isMyShowFav"],
     data() {

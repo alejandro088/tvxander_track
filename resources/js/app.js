@@ -10,6 +10,7 @@ import PortalVue from "portal-vue";
 import { store } from "./store/store";
 import VueYoutube from "vue-youtube";
 import { DateTime } from "luxon";
+import TvXanderLibrary from './plugins/tvxander/components';
 
 Vue.prototype.$date = DateTime;
 
@@ -33,6 +34,8 @@ Vue.filter('humanize', function (value) {
                 .toRelative();
         
   })
+
+Vue.use(TvXanderLibrary);
 
 new Vue({
     vuetify,

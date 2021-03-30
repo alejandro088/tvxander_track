@@ -7,12 +7,15 @@
                     <h2>{{ $page.props.person.name }}</h2>
                 </div>
             </div>
-            <div class="title-hd-sm">
-                <h4>
-                    Profile Images
-                    <span>({{ $page.props.person.images.profiles.length }})</span>
-                </h4>
-            </div>
+
+            <subtitle-tab
+                :withCount="
+                    $page.props.person.images.profiles.length
+                "
+            >
+                Profile Images
+            </subtitle-tab>
+
             <div class="mvsingle-item">
                 <v-row>
                     <v-col
@@ -54,14 +57,15 @@
                     </v-col>
                 </v-row>
             </div>
-            <div class="title-hd-sm">
-                <h4>
-                    Tagged Images
-                    <span>
-                        ({{ $page.props.person.tagged_images.results.length }})</span
-                    >
-                </h4>
-            </div>
+            
+
+            <subtitle-tab
+                :withCount="
+                    $page.props.person.tagged_images.results.length
+                "
+            >
+                Tagged Images
+            </subtitle-tab>
             <div class="mvsingle-item">
                 <v-row>
                     <v-col

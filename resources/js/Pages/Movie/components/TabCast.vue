@@ -3,105 +3,43 @@
         <v-container>
             <h3>Cast & Crew of</h3>
             <h2>{{ $page.props.movie.title }}</h2>
-            <!-- //== -->
-            <div class="col-12 title-hd-sm">
-                <h4>Directors & Credit Writers</h4>
-            </div>
-            <div class="col-12 mvcast-item">
+
+            <subtitle-tab>Directors & Credit Writers</subtitle-tab>
+
+            <div class="mvcast-item">
                 <div
                     class="cast-it"
                     v-for="director in $page.props.directors"
                     :key="director.index"
                 >
                     <div class="cast-left">
-                        <h4>JW</h4>
+                        <v-avatar size="56" class="profile">
+                            <v-img
+                                class="mx-3"
+                                :src="
+                                    director.profile_path
+                                        ? $store.getters.profile_size_w45 +
+                                          director.profile_path
+                                        : '/images/no-image.png'
+                                "
+                                alt=""
+                            />
+                        </v-avatar>
+                        <v-spacer></v-spacer>
                         <a href="#">{{ director.name }}</a>
                     </div>
                     <p>... {{ director.job }}</p>
                 </div>
             </div>
-            <!-- //== -->
+            
+            <subtitle-tab>Cast</subtitle-tab>
 
-            <!-- //== -->
-            <div class="col-12 title-hd-sm">
-                <h4>Cast</h4>
-            </div>
-            <div class="col-12 mvcast-item">
-                <v-virtual-scroll :items="items" :item-height="50" height="300">
-                    <template v-slot:default="{ item }">
-                        <v-list-item>
-                            <v-list-item-avatar>
-                                <v-avatar size="56" class="profile">
-                                    <v-img
-                                        class="mx-3"
-                                        :src="
-                                            item.profile_path
-                                                ? $store.getters.profile_size_w45 + item.profile_path
-                                                : '/images/no-image.png'
-                                        "
-                                        alt=""
-                                    />
-                                </v-avatar>
-                            </v-list-item-avatar>
+            <cast-list :items="items" itemRoute="person.show"></cast-list>
 
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                    <inertia-link
-                                        :href="route('person.show', item.id)"
-                                        >{{ item.name }}</inertia-link
-                                    >
-                                </v-list-item-title>
-                            </v-list-item-content>
+            <subtitle-tab>Produced by</subtitle-tab>
 
-                            <v-list-item-action>
-                                <p>... {{ item.character }}</p>
-                            </v-list-item-action>
-                        </v-list-item>
-                    </template>
-                </v-virtual-scroll>
-            </div>
-            <!-- //== -->
-            <div class="col-12 title-hd-sm">
-                <h4>Produced by</h4>
-            </div>
-            <div class="col-12 mvcast-item">
-                <v-virtual-scroll
-                    :items="$page.props.crew"
-                    :item-height="50"
-                    height="300"
-                >
-                    <template v-slot:default="{ item }">
-                        <v-list-item>
-                            <v-list-item-avatar>
-                                <v-avatar size="56" class="profile">
-                                    <v-img
-                                        class="mx-3"
-                                        :src="
-                                            item.profile_path
-                                                ? $store.getters.profile_size_w45 + item.profile_path
-                                                : '/images/no-image.png'
-                                        "
-                                        alt=""
-                                    />
-                                </v-avatar>
-                            </v-list-item-avatar>
-
-                            <v-list-item-content>
-                                <v-list-item-title>
-                                    <inertia-link
-                                        :href="route('person.show', item.id)"
-                                        >{{ item.name }}</inertia-link
-                                    >
-                                </v-list-item-title>
-                            </v-list-item-content>
-
-                            <v-list-item-action>
-                                <p>... {{ item.job }}</p>
-                            </v-list-item-action>
-                        </v-list-item>
-                    </template>
-                </v-virtual-scroll>
-            </div>
+            <cast-list :items="$page.props.crew" fieldJob="job" itemRoute="person.show"></cast-list>
+           
         </v-container>
     </div>
 </template>

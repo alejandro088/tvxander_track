@@ -3,6 +3,7 @@
         <v-container>
             <h3>Related Movies To</h3>
             <h2>{{ $page.props.movie.title }}</h2>
+
             <div class="topbar-filter">
                 <p>
                     Found
@@ -21,6 +22,7 @@
                     <option value="date">Release date Ascending</option>
                 </select>
             </div>
+            
             <div
                 class="movie-item-style-2"
                 v-for="related in $page.props.relateds.results"

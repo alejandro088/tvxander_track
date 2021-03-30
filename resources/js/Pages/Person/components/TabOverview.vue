@@ -5,18 +5,16 @@
                 <v-col cols="12" sm="12" md="8">
                     <p>{{ $page.props.person.biography }}</p>
                     <p class="time">
-                        <a href="#"
-                            >See full bio <i class="ion-ios-arrow-right"></i
-                        ></a>
+                        <a @click="$emit('change', 1)">
+                            See full bio <i class="ion-ios-arrow-right"></i>
+                        </a>
                     </p>
                     <div class="title-hd-sm">
                         <h4>Photos</h4>
-                        <a href="#" class="time"
-                            >{{
-                                $page.props.person.images.profiles.length
-                            }}
-                            Photos <i class="ion-ios-arrow-right"></i
-                        ></a>
+                        <a @click="$emit('change', 2)" class="time">
+                            {{ $page.props.person.images.profiles.length }}
+                            Photos <i class="ion-ios-arrow-right"></i>
+                        </a>
                     </div>
                     <div class="mvsingle-item ov-item">
                         <v-row>
@@ -62,11 +60,11 @@
                     </div>
                     <div class="title-hd-sm">
                         <h4>filmography</h4>
-                        <a href="#" class="time"
+                        <a @click="$emit('change', 3)" class="time"
                             >Full Filmography<i class="ion-ios-arrow-right"></i
                         ></a>
                     </div>
-                    <!-- movie cast -->
+                    
                     <div class="mvcast-item">
                         <div
                             class="cast-it"

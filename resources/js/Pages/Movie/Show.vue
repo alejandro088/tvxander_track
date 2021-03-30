@@ -92,18 +92,12 @@
 import AppLayout from "@/Layouts/AppLayout";
 import TvMoviePoster from "@/Tvxander/TvMoviePoster";
 import TvxanderTabs from "@/Tvxander/TvxanderTabs";
-import TvxanderVideoModal from "@/Tvxander/TvxanderVideoModal";
-import BtnShare from "@/Tvxander/BtnShare";
-import SourceBreadcumb from "@/Tvxander/UserBreadcumb";
 
 export default {
     components: {
         AppLayout,
         TvMoviePoster,
-        TvxanderTabs,
-        TvxanderVideoModal,
-        BtnShare,
-        SourceBreadcumb
+        TvxanderTabs
     },
     props: ["movie", "isMyMovieFav"],
     data() {

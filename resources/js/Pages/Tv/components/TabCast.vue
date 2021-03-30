@@ -58,7 +58,7 @@
                         </div>
 
                         <!-- //== -->
-                        <div class="col-12 title-hd-sm">
+                        <div class="title-hd-sm">
                             <h4>Produced by</h4>
                         </div>
 

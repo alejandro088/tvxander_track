@@ -7,7 +7,7 @@
                     <h2>{{ $page.props.movie.title }}</h2>
                 </div>
             </div>
-            <div class="col-12 title-hd-sm">
+            <div class="title-hd-sm">
                 <h4>
                     Videos
                     <span>({{ $page.props.videos.results.length }})</span>
@@ -41,17 +41,16 @@
                     </div>
                 </v-col>
             </v-row>
-            <div class="col-12 title-hd-sm">
-                <h4>
-                    Photos
-                    <span>
-                        ({{
-                            $page.props.movie.images.backdrops.length +
-                                $page.props.movie.images.posters.length
-                        }})</span
-                    >
-                </h4>
-            </div>
+
+            <subtitle-tab
+                :withCount="
+                    $page.props.movie.images.backdrops.length +
+                        $page.props.movie.images.posters.length
+                "
+            >
+                Photos
+            </subtitle-tab>
+            
             <div class="mvsingle-item ov-item">
                 <v-row>
                     <v-col

@@ -1,6 +1,45 @@
 <template>
     <div>
         <v-app>
+            <v-navigation-drawer v-model="drawer" app temporary color="#272727">
+                <v-toolbar>
+                    <v-app-bar-nav-icon
+                        @click="$root.$emit('drawer')"
+                    ></v-app-bar-nav-icon>
+                    <v-toolbar-title class="mx-3">
+                        <div class="logo">
+                            <a :href="route('home')">
+                                <h2>TVXander</h2>
+                            </a>
+                        </div>
+                    </v-toolbar-title>
+                </v-toolbar>
+
+                <v-list dense rounded color="#272727">
+                    <v-list-item class="px-2" color="primary">
+                        <v-list-item-avatar size="128">
+                            <v-img src="/images/uploads/user-img.png"></v-img>
+                        </v-list-item-avatar>
+                    </v-list-item>
+                    <inertia-link
+                        v-for="item in items"
+                        :key="item.title"
+                        as="v-btn"
+                        :href="item.route"
+                    >
+                        <v-list-item-icon>
+                            <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
+
+                        <v-list-item-content>
+                            <v-list-item-title>{{
+                                item.title
+                            }}</v-list-item-title>
+                        </v-list-item-content>
+                    </inertia-link>
+                </v-list>
+            </v-navigation-drawer>
+
             <app-header />
 
             <!-- Page Content -->
@@ -39,17 +78,48 @@ export default {
         MovieItems,
         AppFooter
     },
-    data(){
+    data() {
         return {
             alert: false,
             message: "",
-            icon: ""
-        }
+            icon: "",
+            drawer: false,
+            items: [
+                {
+                    title: "Profile",
+                    icon: "mdi-view-dashboard",
+                    route: "/dashboard/profile"
+                },
+                {
+                    title: "Favorite Movies",
+                    icon: "mdi-forum",
+                    route: "/dashboard/favoritemovies"
+                },
+                {
+                    title: "Calendar",
+                    icon: "mdi-forum",
+                    route: "/dashboard/calendar"
+                },
+                {
+                    title: "My Shows",
+                    icon: "mdi-forum",
+                    route: "/dashboard/myshows"
+                },
+                {
+                    title: "Unwatched",
+                    icon: "mdi-forum",
+                    route: "/dashboard/unwatched"
+                }
+            ]
+        };
     },
     mounted() {
-        this.$root.$on('notification', (data) => {
+        this.$root.$on("notification", data => {
             this.showAlert(data);
-            console.log(data);
+        });
+
+        this.$root.$on("drawer", () => {
+            this.drawer = !this.drawer;
         });
     },
     methods: {
@@ -65,7 +135,7 @@ export default {
             setTimeout(function() {
                 alert[0].classList.toggle("alert-is-shown");
             }, 5000);
-        },
+        }
     }
 };
 </script>

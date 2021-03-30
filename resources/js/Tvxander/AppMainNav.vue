@@ -14,7 +14,7 @@
         </v-dialog>
 
         <v-toolbar dark>
-            <v-app-bar-nav-icon></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon @click="$root.$emit('drawer')"></v-app-bar-nav-icon>
             <v-toolbar-title class="mx-3">
                 <div class="logo">
                     <a :href="route('home')">

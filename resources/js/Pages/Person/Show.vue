@@ -23,7 +23,12 @@
                             </p>
 
                             <v-card elevation="2" outlined>
-                                <v-tabs v-model="sTabs" color="red" dark>
+                                <v-tabs
+                                    v-model="sTabs"
+                                    color="red"
+                                    dark
+                                    show-arrows
+                                >
                                     <v-tab
                                         v-for="title in tabs"
                                         :key="title"
@@ -37,7 +42,7 @@
                                 <v-tabs-items v-model="sTabs">
                                     <v-tab-item>
                                         <v-card flat>
-                                            <tab-overview />
+                                            <tab-overview @change="changeTab" />
                                         </v-card>
                                     </v-tab-item>
                                     <v-tab-item>
@@ -68,23 +73,19 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout";
 import TvMoviePoster from "@/Tvxander/TvMoviePoster";
-import TvxanderVideoModal from "@/Tvxander/TvxanderVideoModal";
 import TabOverview from "./components/TabOverview";
 import TabMedia from "./components/TabMedia";
 import TabBiography from "./components/TabBiography";
 import TabFilmography from "./components/TabFilmography";
-import SourceBreadcumb from "@/Tvxander/UserBreadcumb";
 
 export default {
     components: {
         AppLayout,
         TvMoviePoster,
-        TvxanderVideoModal,
         TabOverview,
         TabMedia,
         TabBiography,
-        TabFilmography,
-        SourceBreadcumb
+        TabFilmography
     },
     props: ["movie", "isMyMovieFav"],
     data() {
@@ -94,7 +95,11 @@ export default {
         };
     },
     mounted() {},
-    methods: {}
+    methods: {
+        changeTab(data) {
+            this.sTabs = data;
+        }
+    }
 };
 </script>
 
@@ -105,25 +110,6 @@ export default {
     color: #abb7c4;
     font-weight: bold;
     text-transform: uppercase;
-}
-
-.v-tab {
-    font-family: "Dosis", sans-serif;
-    font-size: 14px;
-    color: #abb7c4;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-.v-tab:hover {
-    color: #dcf836;
-}
-.v-tab--active {
-    color: #dcf836;
-}
-
-.v-tab--active,
-.v-tab:hover {
-    border-bottom: 3px solid #dcf836;
 }
 
 .bg-tab-item {

@@ -7,7 +7,7 @@
                     <h2>{{ $page.props.tv.name }}</h2>
                 </div>
             </div>
-            <div class="col-12 title-hd-sm">
+            <div class="title-hd-sm">
                 <h4>
                     Videos
                     <span>({{ $page.props.videos.results.length }})</span>
@@ -42,7 +42,7 @@
                 </v-col>
             </v-row>
 
-            <div class="col-12 title-hd-sm">
+            <div class="title-hd-sm">
                 <h4>Photos <span> ({{ $page.props.tv.images.backdrops.length + $page.props.tv.images.posters.length}})</span></h4>
             </div>
             <div class="mvsingle-item">
@@ -80,11 +80,9 @@
 </template>
 
 <script>
-import TvxanderVideoModal from "@/Tvxander/TvxanderVideoModal";
 
 export default {
     components: {
-        TvxanderVideoModal
     },
     data() {
         return {

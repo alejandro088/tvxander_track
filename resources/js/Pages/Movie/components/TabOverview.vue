@@ -125,57 +125,14 @@
                         </v-row>
                     </div>
                     <div class="title-hd-sm">
-                        <h4>cast</h4>
-                        <a href="#" class="time"
+                        <h4>Cast</h4>
+                        <a @click="$emit('change', 1)" class="time"
                             >Full Cast & Crew <i class="ion-ios-arrow-right"></i
                         ></a>
                     </div>
-                    <!-- movie cast -->
-                    <div class="mvcast-item">
-                        <v-virtual-scroll
-                            :items="$page.props.cast"
-                            :item-height="50"
-                            height="300"
-                        >
-                            <template v-slot:default="{ item }">
-                                <v-list-item>
-                                    <v-list-item-avatar>
-                                        <v-avatar size="56" class="profile">
-                                            <v-img
-                                                class="mx-3"
-                                                :src="
-                                                    item.profile_path
-                                                        ? $store.getters
-                                                              .profile_size_w45 +
-                                                          item.profile_path
-                                                        : '/images/no-image.png'
-                                                "
-                                                alt=""
-                                            />
-                                        </v-avatar>
-                                    </v-list-item-avatar>
-
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <inertia-link
-                                                :href="
-                                                    route(
-                                                        'person.show',
-                                                        item.id
-                                                    )
-                                                "
-                                                >{{ item.name }}</inertia-link
-                                            >
-                                        </v-list-item-title>
-                                    </v-list-item-content>
-
-                                    <v-list-item-action>
-                                        <p>... {{ item.character }}</p>
-                                    </v-list-item-action>
-                                </v-list-item>
-                            </template>
-                        </v-virtual-scroll>
-                    </div>
+                    
+                    <cast-list :items="$page.props.cast" itemRoute="person.show"></cast-list>
+                   
                 </v-col>
 
                 <v-col cols="12" sm="12" md="4">

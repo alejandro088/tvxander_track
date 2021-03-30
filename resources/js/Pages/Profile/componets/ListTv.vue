@@ -72,6 +72,7 @@ export default {
     },
     computed: {
         showsUnwatched() {
+            
             return this.shows.filter(item => {
                 if (item.episodes_unwatched > 0) {
                     return item;

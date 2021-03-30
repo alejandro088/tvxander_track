@@ -25,7 +25,7 @@
                     <option value="date">Release date Ascending</option>
                 </select>
             </div>
-            <!-- movie cast -->
+            
             <div class="mvcast-item">
                 <div
                     class="cast-it"
