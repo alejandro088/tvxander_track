@@ -34,9 +34,9 @@
                 </swiper>
             </v-row>
 
-            <span v-if="!shows"
-                >En este momento no tienes Shows registrados</span
-            >
+            <span v-if="!shows">
+                En este momento no tienes Shows registrados
+            </span>
         </div>
     </div>
 </template>
@@ -48,7 +48,7 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
 
 export default {
-     components: {
+    components: {
         Swiper,
         SwiperSlide
     },
@@ -68,11 +68,10 @@ export default {
                     el: ".swiper-scrollbar"
                 }
             }
-        }
+        };
     },
     computed: {
         showsUnwatched() {
-            
             return this.shows.filter(item => {
                 if (item.episodes_unwatched > 0) {
                     return item;

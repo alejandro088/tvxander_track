@@ -45,6 +45,7 @@
         "swiper": "^6.4.10",
         "tippy.js": "^6.3.1",
         "vue-awesome-swiper": "^4.1.1",
+        "vue-cool-lightbox": "^2.7.1",
         "vue-full-calendar": "^2.8.1-0",
         "vue-material": "^1.0.0-beta-15",
         "vue-youtube": "^1.4.0",

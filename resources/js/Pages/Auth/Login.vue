@@ -117,6 +117,7 @@ export default {
                     onFinish: () => {
                         this.loading = false;
                         this.form.reset("password")
+                        window.location = '/';
                     }
                 });
         }

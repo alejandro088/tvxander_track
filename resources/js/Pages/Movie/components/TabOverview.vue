@@ -1,6 +1,18 @@
 <template>
     <div id="overview" class="tab active">
         <v-container>
+            <CoolLightBox
+                :items="movie.images.backdrops"
+                :index="backdrops"
+                @close="backdrops = null"
+            >
+            </CoolLightBox>
+            <CoolLightBox
+                :items="movie.images.posters"
+                :index="posters"
+                @close="posters = null"
+            >
+            </CoolLightBox>
             <v-row>
                 <v-col cols="12" sm="12" md="8">
                     <p>{{ $page.props.movie.overview }}</p>
@@ -20,81 +32,69 @@
                     <div class="mvsingle-item ov-item">
                         <v-row>
                             <v-col
-                                v-for="image in $page.props.movie.images
+                                v-for="(image, imageIndex) in movie.images
                                     .backdrops"
                                 :key="image.file_path"
+                                @click="backdrops = imageIndex"
                                 class="d-flex child-flex"
                                 cols="4"
                             >
-                                <a
-                                    class="img-lightbox"
-                                    data-fancybox-group="gallery"
-                                    :href="
-                                        $store.getters.backdrop_size_original +
+                                <v-img
+                                    :src="
+                                        $store.getters.backdrop_size_w300 +
                                             image.file_path
                                     "
-                                    ><v-img
-                                        :src="
-                                            $store.getters.backdrop_size_w300 +
-                                                image.file_path
-                                        "
-                                        alt=""
-                                        aspect-ratio="1"
-                                        class="grey lighten-2"
-                                    >
-                                        <template v-slot:placeholder>
-                                            <v-row
-                                                class="fill-height ma-0"
-                                                align="center"
-                                                justify="center"
-                                            >
-                                                <v-progress-circular
-                                                    indeterminate
-                                                    color="grey lighten-5"
-                                                ></v-progress-circular>
-                                            </v-row>
-                                        </template>
-                                    </v-img>
-                                </a>
+                                    alt=""
+                                    aspect-ratio="1"
+                                    class="grey lighten-2"
+                                >
+                                    <template v-slot:placeholder>
+                                        <v-row
+                                            class="fill-height ma-0"
+                                            align="center"
+                                            justify="center"
+                                        >
+                                            <v-progress-circular
+                                                indeterminate
+                                                color="grey lighten-5"
+                                            ></v-progress-circular>
+                                        </v-row>
+                                    </template>
+                                </v-img>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col
-                                v-for="image in $page.props.movie.images
+                                v-for="(image, imageIndex) in movie.images
                                     .posters"
                                 :key="image.file_path"
+                                @click="posters = imageIndex"
                                 class="d-flex child-flex"
                                 cols="4"
                             >
-                                <a
-                                    class="img-lightbox"
-                                    data-fancybox-group="gallery"
-                                    :href="
-                                        $store.getters.poster_size_original +
+                                <v-img
+                                    :src="
+                                        $store.getters.poster_size_w154 +
                                             image.file_path
                                     "
-                                    ><v-img
-                                        :src="
-                                            $store.getters.poster_size_w154 +
-                                                image.file_path
-                                        "
-                                        alt=""
-                                    >
-                                        <template v-slot:placeholder>
-                                            <v-row
-                                                class="fill-height ma-0"
-                                                align="center"
-                                                justify="center"
+                                    alt=""
+                                >
+                                    <template v-slot:placeholder>
+                                        <v-row
+                                            class="fill-height ma-0"
+                                            align="center"
+                                            justify="center"
+                                        >
+                                            <v-progress-circular
+                                                indeterminate
+                                                color="grey lighten-5"
                                             >
-                                                <v-progress-circular
-                                                    indeterminate
-                                                    color="grey lighten-5"
-                                                ></v-progress-circular>
-                                            </v-row>
-                                        </template>
-                                    </v-img>
-                                </a> </v-col
-                        ></v-row>
+                                            </v-progress-circular>
+                                        </v-row>
+                                    </template>
+                                </v-img>
+                            </v-col>
+                        </v-row>
 
                         <v-divider />
 
@@ -130,9 +130,12 @@
                             >Full Cast & Crew <i class="ion-ios-arrow-right"></i
                         ></a>
                     </div>
-                    
-                    <cast-list :items="$page.props.cast" itemRoute="person.show"></cast-list>
-                   
+
+                    <cast-list
+                        :items="$page.props.cast"
+                        itemRoute="person.show"
+                    >
+                    </cast-list>
                 </v-col>
 
                 <v-col cols="12" sm="12" md="4">
@@ -182,6 +185,24 @@
 
 <script>
 export default {
+    data() {
+        return {
+            movie: this.$page.props.movie,
+            backdrops: null,
+            posters: null
+        };
+    },
+    mounted() {
+        this.movie.images.posters.forEach(image => {
+            image.src =
+                this.$store.getters.poster_size_original + image.file_path;
+        });
+
+        this.movie.images.backdrops.forEach(image => {
+            image.src =
+                this.$store.getters.backdrop_size_original + image.file_path;
+        });
+    },
     methods: {
         showVideoModal(video) {
             this.$store.state.videoModal = true;

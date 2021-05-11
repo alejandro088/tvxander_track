@@ -19,7 +19,8 @@
                 @change="setWatched(episode)"
                 :color="color"
                 hide-details
-            ></v-switch>
+            >
+            </v-switch>
         </div>
     </div>
 </template>
@@ -29,13 +30,13 @@ export default {
     props: ["episode", "initWatched"],
     data() {
         return {
-            color: 'primary',
+            color: "primary",
             watched: this.initWatched
         };
     },
     methods: {
         setWatched(episode) {
-            this.color = 'success';
+            this.color = "success";
 
             window.axios
                 .post(
@@ -53,7 +54,7 @@ export default {
                 )
                 .then(
                     response => {
-                        this.color = 'primary';
+                        this.color = "primary";
 
                         this.$root.$emit("notification", {
                             icon: "success",
@@ -64,7 +65,7 @@ export default {
                     },
                     response => {
                         // error callback
-                        this.color = 'error';
+                        this.color = "error";
 
                         this.$root.$emit("notification", {
                             icon: "error",

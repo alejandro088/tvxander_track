@@ -35,7 +35,9 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span v-if="show.last_episode_to_air != null">
+                                    <span
+                                        v-if="show.last_episode_to_air != null"
+                                    >
                                         <strong>
                                             {{
                                                 show.last_episode_to_air
@@ -64,7 +66,9 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <span v-if="show.next_episode_to_air != null">
+                                    <span
+                                        v-if="show.next_episode_to_air != null"
+                                    >
                                         <strong class="number">
                                             {{
                                                 show.next_episode_to_air
@@ -93,19 +97,23 @@
                                 </td>
 
                                 <td>
-                                    <button
+                                    <v-btn
                                         @click="showDelete(show.id)"
-                                        class="btn btn-danger"
+                                        color="error"
                                     >
-                                        <i class="fa fa-trash"></i>
-                                    </button>
+                                        <v-icon>
+                                            mdi-delete
+                                        </v-icon>
+                                    </v-btn>
 
-                                    <button
+                                    <v-btn
                                         @click="showArchive(show.id)"
-                                        class="btn btn-warning"
+                                        color="warning"
                                     >
-                                        <i class="fa fa-file"></i>
-                                    </button>
+                                        <v-icon>
+                                            mdi-file
+                                        </v-icon>
+                                    </v-btn>
                                 </td>
                             </tr>
                         </tbody>

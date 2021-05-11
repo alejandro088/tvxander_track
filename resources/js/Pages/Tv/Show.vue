@@ -47,7 +47,6 @@
                             <div class="social-btn" v-if="$page.props.user">
                                 <a
                                     v-if="!myShowFav"
-                                    href="#"
                                     class="parent-btn"
                                     @click="addToFavs"
                                 >
@@ -55,7 +54,6 @@
                                 </a>
                                 <a
                                     v-else
-                                    href="#"
                                     class="parent-btn"
                                     @click="removeToFavs"
                                 >
@@ -64,7 +62,6 @@
                                 </a>
                                 <a
                                     v-if="!myShow"
-                                    href="#"
                                     class="parent-btn"
                                     @click="addToList"
                                 >
@@ -72,7 +69,6 @@
                                 </a>
                                 <a
                                     v-else
-                                    href="#"
                                     class="parent-btn"
                                     @click="removeToList"
                                 >

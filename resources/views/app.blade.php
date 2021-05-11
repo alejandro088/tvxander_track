@@ -37,11 +37,8 @@
         @inertia
 
         <script src="/js/jquery.js"></script>
-        
-        <script src="/js/plugins2.js"></script>
 
         <script src="//cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
-        <script src="/js/custom.js"></script>
         
     </body>
 </html>

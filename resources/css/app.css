@@ -395,9 +395,7 @@ html {
     /* Still needed for Firefox 28; see http://caniuse.com/#search=box-sizing */
     box-sizing: border-box;
 }
-body {
-    overflow-x: hidden;
-}
+
 article,
 aside,
 details,

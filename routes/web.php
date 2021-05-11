@@ -31,6 +31,12 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+
+Route::get('/test1', function () {
+    return view('test.register');
+})->name('home');
+
+
 Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movie.show');
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
