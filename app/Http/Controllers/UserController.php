@@ -61,9 +61,7 @@ class UserController extends Controller
             ]);
         }
 
-        return Inertia::render('Profile/FavoriteMovies', [
-            'favoriteMovies' => $movies,
-        ]);
+        return $movies;
     }
 
     public function unwatched()

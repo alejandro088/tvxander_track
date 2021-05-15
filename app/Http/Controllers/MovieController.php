@@ -16,7 +16,7 @@ class MovieController extends Controller
 
         $theMovie = $repo->getMovie($movie, [
             'language' => 'es',
-             'append_to_response' => 'videos,images,credits',
+             'append_to_response' => 'videos,images,credits,network,watch/providers',
              'include_image_language' => 'en,null'
         ]);
 
@@ -40,7 +40,7 @@ class MovieController extends Controller
             return $value->job == 'Writer';
         });
 
-        return Inertia::render('Movie/Show', [
+        return [
             'movie' => $theMovie,
             'videos' => $theMovie->videos,
             'directors' => $directors->all(),
@@ -48,8 +48,9 @@ class MovieController extends Controller
             'cast' => $cast,
             'crew' => $crew,
             'relateds' => $relateds,
-            'isMyMovieFav' => $isMyMovieFav
-        ]);
+            'isMyMovieFav' => $isMyMovieFav,
+            'providers' => ((array)$theMovie)['watch/providers'],
+        ];
     }
 
     public function list($get, $movie = null)

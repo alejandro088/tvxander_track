@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ShowController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\MovieController;
 
 /*
@@ -16,9 +18,15 @@ use App\Http\Controllers\MovieController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::middleware('auth:api')->post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:api')->get('/profile/favoritemovies', [UserController::class, 'myFavoriteMovies'])->name('user.favorite.movies');
 
 Route::get('/movies/discover/{get}/{movie?}', [MovieController::class, 'list']);
 
@@ -31,3 +39,5 @@ Route::get('/movies/toprated', [MovieController::class, 'toprated']);
 Route::get('/movies/upcoming', [MovieController::class, 'upcoming']);
 
 Route::get('/movies/discoverByGenres', [MovieController::class, 'discoverByGenres']);
+
+Route::get('/movies/{movie}', [MovieController::class, 'show'])->name('movie.show');
