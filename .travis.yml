@@ -1,0 +1,19 @@
+language: php
+
+php:
+  - 7.3
+  - 7.4
+  - 8.0
+  - hhvm # on Trusty only
+  - nightly
+
+os: linux
+
+before_script:
+  - composer install
+  - cp .env.example .env
+  - php artisan key:generate
+  - php artisan jwt:secret
+
+script:
+  - php artisan test
