@@ -9,11 +9,13 @@ php:
 
 os: linux
 
+env:
+  - TMDB_APP_KEY=7d637f29355aba225bd62d7af21d38d5
+
 before_script:
   - composer install
   - cp .env.example .env
   - php artisan key:generate
-  - php artisan jwt:secret
 
 script:
   - php artisan test
