@@ -24,7 +24,7 @@
         "vue-template-compiler": "^2.5.22"
     },
     "dependencies": {
-        "bootstrap-vue": "^2.0.0-rc.11",
+        "bootstrap-vue": "^2.0.0-rc.12",
         "dayspan-vuetify": "^0.4.0",
         "npm": "^8.19.2",
         "vue-full-calendar": "^2.7.0",
